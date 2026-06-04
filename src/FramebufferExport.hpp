@@ -15,20 +15,19 @@ public:
     // Export to PNG
     static bool to_png(const Framebuffer& framebuffer, std::string filepath) {
         // Extract raw colorbuffer
-        std::vector<uint8_t> colorbuffer_raw = std::vector<uint8_t>(4 * framebuffer.size());
+        std::vector<uint8_t> colorbuffer_raw = std::vector<uint8_t>(3 * framebuffer.size());
         for (int i = 0; i < framebuffer.size(); i++) {
-            colorbuffer_raw[4*i]     = std::min(int(256.0f * framebuffer[i][0]), 255);
-            colorbuffer_raw[4*i + 1] = std::min(int(256.0f * framebuffer[i][1]), 255);
-            colorbuffer_raw[4*i + 2] = std::min(int(256.0f * framebuffer[i][2]), 255);
-            colorbuffer_raw[4*i + 3] = 255;
+            colorbuffer_raw[3*i]     = std::min(int(256.0f * framebuffer[i][0]), 255);
+            colorbuffer_raw[3*i + 1] = std::min(int(256.0f * framebuffer[i][1]), 255);
+            colorbuffer_raw[3*i + 2] = std::min(int(256.0f * framebuffer[i][2]), 255);
         }
 
         // Perform write to filesystem
         int err = stbi_write_png(
             filepath.c_str(),
-            framebuffer.width, framebuffer.height, 4,
+            framebuffer.width, framebuffer.height, 3,
             colorbuffer_raw.data(),
-            framebuffer.width * 4 * sizeof(uint8_t)
+            framebuffer.width * 3 * sizeof(uint8_t)
         );
 
         // Error handling
