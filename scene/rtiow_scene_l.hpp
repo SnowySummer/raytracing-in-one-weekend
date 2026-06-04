@@ -10,6 +10,7 @@
 #include <memory>
 
 void rtiow_scene1(
+    Renderer& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Hittable>& world
@@ -17,6 +18,9 @@ void rtiow_scene1(
     // Setup main PRNG
     PRNG prng;
     prng.set_seed(1337);
+
+    // Setup renderer
+    renderer.samples_per_pixel = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
