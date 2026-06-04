@@ -1,5 +1,5 @@
-#ifndef FRAMEBUFFEREXPORT_HPP
-#define FRAMEBUFFEREXPORT_HPP
+#ifndef IO__FRAMEBUFFEREXPORT_HPP
+#define IO__FRAMEBUFFEREXPORT_HPP
 
 #include <Framebuffer.hpp>
 #include <cstdint>
