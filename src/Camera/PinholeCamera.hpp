@@ -1,5 +1,7 @@
-#ifndef CAMERA_HPP
-#define CAMERA_HPP
+#ifndef CAMERA__PINHOLECAMERA_HPP
+#define CAMERA__PINHOLECAMERA_HPP
+
+#include "Camera.hpp"
 
 #include <vec4.hpp>
 #include <Ray.hpp>
@@ -8,7 +10,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 
-class Camera {
+class PinholeCamera : public Camera {
 public:
     vec4 eye;
     vec4 direction;
@@ -22,8 +24,8 @@ private:
     vec4 viewport_up;
 
 public:
-    // Camera constructor
-    Camera() :
+    // PinholeCamera constructor
+    PinholeCamera() :
     eye(vec4(0.0f, 0.0f, 0.0f)),
     direction(vec4(0.0f, 0.0f, -1.0f)),
     up(vec4(0.0f, 1.0f, 0.0f)),
@@ -61,7 +63,7 @@ public:
     }
 
     // Generate ray
-    Ray gen_ray(float x, float y) const {
+    Ray gen_ray(float x, float y) const override {
         // Ray points
         vec4 ray_origin = eye;
         vec4 ray_viewport = viewport_origin + x * viewport_right - y * viewport_up;

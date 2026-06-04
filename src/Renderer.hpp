@@ -4,8 +4,9 @@
 #include <vec4.hpp>
 #include <Ray.hpp>
 #include <Framebuffer.hpp>
-#include <Camera.hpp>
+#include <Camera/Camera.hpp>
 #include <Hittable/Hittable.hpp>
+#include <cstdio>
 #include <memory>
 
 class Renderer {
@@ -14,12 +15,13 @@ public:
     Renderer() {}
 
     // Main render function
-    void render(Framebuffer& framebuffer, const Camera camera, std::shared_ptr<Hittable>& world) {
+    void render(Framebuffer& framebuffer, const std::shared_ptr<Camera> camera, std::shared_ptr<Hittable>& world) {
         // Per-pixel rendering
         for (int y = 0; y < framebuffer.height; y++) {
+            // Render line
             for (int x = 0; x < framebuffer.width; x++) {
                 // Generate ray
-                Ray ray = camera.gen_ray(x, y);
+                Ray ray = camera->gen_ray(x, y);
                 vec4 color = this->ray_value(ray, world);
                 framebuffer.get(x, y) = color;
             }

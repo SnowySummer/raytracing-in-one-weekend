@@ -1,5 +1,5 @@
 #include <Framebuffer.hpp>
-#include <Camera.hpp>
+#include <Camera/PinholeCamera.hpp>
 #include <Hittable/HittableList.hpp>
 #include <Hittable/Sphere.hpp>
 #include <Renderer.hpp>
@@ -12,8 +12,10 @@ int main() {
     Framebuffer framebuffer = Framebuffer(400, 225);
 
     // Setup camera
-    Camera camera;
-    camera.setup(framebuffer);
+    std::shared_ptr<Camera> camera;
+    std::shared_ptr<PinholeCamera> camera_impl = std::make_shared<PinholeCamera>();
+    camera_impl->setup(framebuffer);
+    camera = camera_impl;
 
     // Setup scene
     std::shared_ptr<Hittable> world;
