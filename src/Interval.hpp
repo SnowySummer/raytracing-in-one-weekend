@@ -1,0 +1,19 @@
+#ifndef INTERVAL_HPP
+#define INTERVAL_HPP
+
+class Interval {
+public:
+    float min;
+    float max;
+
+public:
+    // Interval constructor
+    Interval() : min(0.0f), max(0.0f) {}
+    Interval(float _min, float _max) : min(_min), max(_max) {}
+
+    // Bounds checking
+    bool surrounds(float t) { return min <  t && t <  max; }
+    bool contains(float t)  { return min <= t && t <= max; }
+};
+
+#endif
