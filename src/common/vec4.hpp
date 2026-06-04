@@ -11,6 +11,7 @@ private:
 public:
     // vec4 constructor
     vec4() : e{0.0f, 0.0f, 0.0f, 0.0f} {}
+    vec4(float e0, float e1) : e{e0, e1, 0.0f, 0.0f} {}
     vec4(float e0, float e1, float e2) : e{e0, e1, e2, 0.0f} {}
     vec4(float e0, float e1, float e2, float e3) : e{e0, e1, e2, e3} {}
 

@@ -14,7 +14,7 @@ public:
     virtual ~Camera() {}
 
     // Generate ray
-    virtual Ray gen_ray(float x, float y) const = 0;
+    virtual Ray gen_ray(float x, float y) = 0;
 };
 
 

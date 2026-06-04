@@ -14,11 +14,16 @@ void rtiow_scene1(
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Hittable>& world
 ) {
+    // Setup main PRNG
+    PRNG prng;
+    prng.set_seed(1337);
+
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
 
     // Setup camera
     std::shared_ptr<PinholeCamera> pinhole_camera = std::make_shared<PinholeCamera>();
+    pinhole_camera->prng.set_seed(prng.rand());
     pinhole_camera->setup(framebuffer);
     camera = pinhole_camera;
 

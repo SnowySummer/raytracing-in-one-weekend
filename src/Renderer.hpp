@@ -12,8 +12,11 @@
 
 class Renderer {
 public:
+    int samples_per_pixel;
+
+public:
     // Renderer constructor
-    Renderer() {}
+    Renderer() : samples_per_pixel(1) {}
 
     // Main render function
     void render(Framebuffer& framebuffer, const std::shared_ptr<Camera> camera, std::shared_ptr<Hittable>& world) {
@@ -21,9 +24,13 @@ public:
         for (int y = 0; y < framebuffer.height; y++) {
             // Render line
             for (int x = 0; x < framebuffer.width; x++) {
-                // Generate ray
-                Ray ray = camera->gen_ray(x, y);
-                vec4 color = this->ray_value(ray, world);
+                // Accumulate color
+                vec4 color = vec4(0.0f, 0.0f, 0.0f);
+                for (int i = 0; i < samples_per_pixel; i++) {
+                    Ray ray = camera->gen_ray(x, y);
+                    color += this->ray_value(ray, world);
+                }
+                color /= samples_per_pixel;
                 framebuffer.get(x, y) = color;
             }
         }

@@ -3,6 +3,7 @@
 
 #include "Camera.hpp"
 
+#include <common/PRNG.hpp>
 #include <common/vec4.hpp>
 #include <common/Ray.hpp>
 #include <Framebuffer.hpp>
@@ -12,6 +13,7 @@
 
 class PinholeCamera : public Camera {
 public:
+    PRNG prng;
     vec4 eye;
     vec4 direction;
     vec4 up;
@@ -26,6 +28,7 @@ private:
 public:
     // PinholeCamera constructor
     PinholeCamera() :
+    prng(),
     eye(vec4(0.0f, 0.0f, 0.0f)),
     direction(vec4(0.0f, 0.0f, -1.0f)),
     up(vec4(0.0f, 1.0f, 0.0f)),
@@ -63,10 +66,14 @@ public:
     }
 
     // Generate ray
-    Ray gen_ray(float x, float y) const override {
+    Ray gen_ray(float x, float y) override {
         // Ray points
         vec4 ray_origin = eye;
         vec4 ray_viewport = viewport_origin + x * viewport_right - y * viewport_up;
+
+        // Jitter camera
+        vec4 pixel_offset = 0.5f * prng.square();
+        ray_viewport += pixel_offset[0]*viewport_right + pixel_offset[1]*viewport_up;
 
         return Ray(ray_origin, vec4::normalise(ray_viewport - ray_origin));
     }

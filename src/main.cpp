@@ -18,6 +18,7 @@ int main() {
 
     // Render
     Renderer renderer;
+    renderer.samples_per_pixel = 10;
     renderer.render(framebuffer, camera, world);
 
     // Export to PNG
