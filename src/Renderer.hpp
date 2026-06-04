@@ -3,10 +3,10 @@
 
 #include <vec4.hpp>
 #include <Ray.hpp>
-
 #include <Framebuffer.hpp>
 #include <Camera.hpp>
-#include <Hittable/Sphere.hpp>
+#include <Hittable/Hittable.hpp>
+#include <memory>
 
 class Renderer {
 public:
@@ -14,28 +14,31 @@ public:
     Renderer() {}
 
     // Main render function
-    void render(Framebuffer& framebuffer, const Camera camera) {
+    void render(Framebuffer& framebuffer, const Camera camera, std::shared_ptr<Hittable>& world) {
         // Per-pixel rendering
         for (int y = 0; y < framebuffer.height; y++) {
             for (int x = 0; x < framebuffer.width; x++) {
                 // Generate ray
                 Ray ray = camera.gen_ray(x, y);
-
-                // Check hit
-                vec4 color = vec4(0.0f, 0.0f, 0.0f);
-                Sphere sphere = Sphere(vec4(0.0f, 0.0f, -1.0f), 0.5f);
-                HitRecord record;
-                if (!sphere.ray_hit(ray, Interval(0, INFINITY), record)) {
-                    // Render background
-                    float t = 0.5f * (1.0f + ray.direction[1]);
-                    color = (1.0f - t) * vec4(1.0f, 1.0f, 1.0f) + t * vec4(0.5f, 0.7f, 1.0f);
-                } else {
-                    color = 0.5f * (vec4(1.0f, 1.0f, 1.0f) + record.n);
-                }
-
+                vec4 color = this->ray_value(ray, world);
                 framebuffer.get(x, y) = color;
             }
         }
+    }
+
+private:
+    // Get ray value
+    vec4 ray_value(Ray ray, std::shared_ptr<Hittable>& world) {
+        // Check hit
+        HitRecord record;
+        if (!world->ray_hit(ray, Interval(0, INFINITY), record)) {
+            // Render background
+            float t = 0.5f * (1.0f + ray.direction[1]);
+            return (1.0f - t) * vec4(1.0f, 1.0f, 1.0f) + t * vec4(0.5f, 0.7f, 1.0f);
+        }
+
+        // Render hittable
+        return 0.5f * (vec4(1.0f, 1.0f, 1.0f) + record.n);
     }
 };
 
