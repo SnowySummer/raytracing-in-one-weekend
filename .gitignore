@@ -1,2 +1,5 @@
 # Ignore IDE configuration
 .vscode/
+
+# Ignore build directory
+build/
