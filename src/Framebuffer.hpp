@@ -1,7 +1,7 @@
 #ifndef FRAMEBUFFER_HPP
 #define FRAMEBUFFER_HPP
 
-#include <vec4.hpp>
+#include <common/vec4.hpp>
 #include <vector>
 
 class Framebuffer {

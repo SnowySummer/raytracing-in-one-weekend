@@ -1,8 +1,8 @@
 #ifndef HITTABLE__HITTABLE_HPP
 #define HITTABLE__HITTABLE_HPP
 
-#include <Interval.hpp>
-#include <Ray.hpp>
+#include <common/Interval.hpp>
+#include <common/Ray.hpp>
 #include <HitRecord.hpp>
 
 class Hittable {

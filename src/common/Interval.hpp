@@ -1,5 +1,5 @@
-#ifndef INTERVAL_HPP
-#define INTERVAL_HPP
+#ifndef COMMON__INTERVAL_HPP
+#define COMMON__INTERVAL_HPP
 
 class Interval {
 public:

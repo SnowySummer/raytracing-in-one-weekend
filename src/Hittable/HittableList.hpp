@@ -3,9 +3,9 @@
 
 #include "Hittable.hpp"
 
-#include <Interval.hpp>
-#include <vec4.hpp>
-#include <Ray.hpp>
+#include <common/Interval.hpp>
+#include <common/vec4.hpp>
+#include <common/Ray.hpp>
 #include <HitRecord.hpp>
 #include <memory>
 #include <vector>

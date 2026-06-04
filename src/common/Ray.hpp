@@ -1,7 +1,7 @@
-#ifndef RAY_HPP
-#define RAY_HPP
+#ifndef COMMON__RAY_HPP
+#define COMMON__RAY_HPP
 
-#include <vec4.hpp>
+#include <common/vec4.hpp>
 
 class Ray {
 public:

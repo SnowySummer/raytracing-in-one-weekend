@@ -1,5 +1,5 @@
-#ifndef VEC4_HPP
-#define VEC4_HPP
+#ifndef COMMON__VEC4_HPP
+#define COMMON__VEC4_HPP
 
 #define _USE_MATH_DEFINES
 #include <cmath>

@@ -1,8 +1,8 @@
 #ifndef CAMERA__CAMERA_HPP
 #define CAMERA__CAMERA_HPP
 
-#include <vec4.hpp>
-#include <Ray.hpp>
+#include <common/vec4.hpp>
+#include <common/Ray.hpp>
 #include <Framebuffer.hpp>
 
 #define _USE_MATH_DEFINES

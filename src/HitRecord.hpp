@@ -1,8 +1,8 @@
 #ifndef HITRECORD_HPP
 #define HITRECORD_HPP
 
-#include <vec4.hpp>
-#include <Ray.hpp>
+#include <common/vec4.hpp>
+#include <common/Ray.hpp>
 
 class HitRecord {
 public:

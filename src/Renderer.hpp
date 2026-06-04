@@ -1,8 +1,9 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
-#include <vec4.hpp>
-#include <Ray.hpp>
+#include <common/Interval.hpp>
+#include <common/vec4.hpp>
+#include <common/Ray.hpp>
 #include <Framebuffer.hpp>
 #include <Camera/Camera.hpp>
 #include <Hittable/Hittable.hpp>
