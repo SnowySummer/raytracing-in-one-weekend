@@ -9,4 +9,6 @@ set( SRC_FILES
     "src/main.cpp"
 )
 add_executable(main ${SRC_FILES})
+
 target_include_directories(main PRIVATE "src/")
+target_include_directories(main PRIVATE "vendor/")
