@@ -4,6 +4,7 @@
 #include <vec4.hpp>
 #include <Ray.hpp>
 #include <Framebuffer.hpp>
+
 #define _USE_MATH_DEFINES
 #include <cmath>
 

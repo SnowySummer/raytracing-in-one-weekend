@@ -37,7 +37,8 @@ public:
         // Update record
         record.t = t;
         record.p = ray.at(t);
-        record.n = (record.p - center) / radius;
+        vec4 outward_normal = (record.p - center) / radius;
+        record.set_front_face(ray, outward_normal);
 
         return true;
     }
