@@ -1,5 +1,5 @@
-#ifndef CAMERA_HPP
-#define CAMERA_HPP
+#ifndef CAMERA__CAMERA_HPP
+#define CAMERA__CAMERA_HPP
 
 #include <vec4.hpp>
 #include <Ray.hpp>
