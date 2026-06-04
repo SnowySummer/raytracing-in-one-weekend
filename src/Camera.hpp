@@ -60,7 +60,7 @@ public:
     }
 
     // Generate ray
-    Ray gen_ray(float x, float y) {
+    Ray gen_ray(float x, float y) const {
         // Ray points
         vec4 ray_origin = eye;
         vec4 ray_viewport = viewport_origin + x * viewport_right - y * viewport_up;
