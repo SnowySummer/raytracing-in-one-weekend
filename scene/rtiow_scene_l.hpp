@@ -21,6 +21,7 @@ void rtiow_scene1(
     constexpr uint32_t prng_seed = 1337;
 
     // Setup renderer
+    renderer.prng.set_seed(prng_seed);
     renderer.samples_per_pixel = 100;
     renderer.ray_maxdepth = 10;
 
