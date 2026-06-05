@@ -25,6 +25,9 @@ public:
     void render(Framebuffer& framebuffer, const std::shared_ptr<Camera> camera, std::shared_ptr<Hittable>& world) {
         // Per-pixel rendering
         for (int y = 0; y < framebuffer.height; y++) {
+            // Log line
+            printf("\e[0K\r[RENDER] line %d/%d", y+1, framebuffer.height);
+
             // Render line
             for (int x = 0; x < framebuffer.width; x++) {
                 // Accumulate color
@@ -37,6 +40,8 @@ public:
                 framebuffer.get(x, y) = color;
             }
         }
+
+        printf("\n");
     }
 
 private:
