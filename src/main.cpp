@@ -3,6 +3,7 @@
 #include <Hittable/HittableList.hpp>
 #include <Hittable/Sphere.hpp>
 #include <Renderer.hpp>
+#include <PostProcessing.hpp>
 #include <io/FramebufferExport.hpp>
 #include <memory>
 
@@ -19,6 +20,7 @@ int main() {
 
     // Render
     renderer.render(framebuffer, camera, world);
+    PostProcessing::gamma(framebuffer, 1.0f / 2.2f);
 
     // Export to PNG
     FramebufferExport::to_png(framebuffer, "../gen/img.png");
