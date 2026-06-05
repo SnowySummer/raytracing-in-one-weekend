@@ -41,7 +41,16 @@ public:
 
     // 3D sampling
     vec4 color() {
-        return vec4(this->randf(), this->randf());
+        return vec4(this->randf(), this->randf(), this->randf());
+    }
+    vec4 cube() {
+        return vec4(this->randf(-1.0f, 1.0f), this->randf(-1.0f, 1.0f), this->randf(-1.0f, 1.0f));
+    }
+    vec4 on_sphere() {
+        while (true) {
+            vec4 r = this->cube();
+            if (r.len2() < 1.0f) return vec4::normalise(r);
+        }
     }
 };
 

@@ -1,6 +1,7 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
+#include <common/PRNG.hpp>
 #include <common/Interval.hpp>
 #include <common/vec4.hpp>
 #include <common/Ray.hpp>
@@ -12,11 +13,13 @@
 
 class Renderer {
 public:
+    PRNG prng;
     int samples_per_pixel;
+    int ray_maxdepth;
 
 public:
     // Renderer constructor
-    Renderer() : samples_per_pixel(1) {}
+    Renderer() : prng(), samples_per_pixel(1), ray_maxdepth(1) {}
 
     // Main render function
     void render(Framebuffer& framebuffer, const std::shared_ptr<Camera> camera, std::shared_ptr<Hittable>& world) {
@@ -28,7 +31,7 @@ public:
                 vec4 color = vec4(0.0f, 0.0f, 0.0f);
                 for (int i = 0; i < samples_per_pixel; i++) {
                     Ray ray = camera->gen_ray(x, y);
-                    color += this->ray_value(ray, world);
+                    color += this->ray_value(ray, ray_maxdepth, world);
                 }
                 color /= samples_per_pixel;
                 framebuffer.get(x, y) = color;
@@ -38,17 +41,20 @@ public:
 
 private:
     // Get ray value
-    vec4 ray_value(Ray ray, std::shared_ptr<Hittable>& world) {
+    vec4 ray_value(Ray ray, int ray_depth, std::shared_ptr<Hittable>& world) {
+        // Recursion check
+        if (ray_depth <= 0) return vec4(0.0f, 0.0f, 0.0f);
+        
         // Check hit
         HitRecord record;
-        if (!world->ray_hit(ray, Interval(0, INFINITY), record)) {
+        if (!world->ray_hit(ray, Interval(1e-3f, INFINITY), record)) {
             // Render background
             float t = 0.5f * (1.0f + ray.direction[1]);
             return (1.0f - t) * vec4(1.0f, 1.0f, 1.0f) + t * vec4(0.5f, 0.7f, 1.0f);
         }
 
         // Render hittable
-        return 0.5f * (vec4(1.0f, 1.0f, 1.0f) + record.n);
+        return 0.5f * ray_value(Ray(record.p, record.n + prng.on_sphere()), ray_depth-1, world);
     }
 };
 

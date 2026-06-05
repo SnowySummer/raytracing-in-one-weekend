@@ -20,7 +20,8 @@ void rtiow_scene1(
     prng.set_seed(1337);
 
     // Setup renderer
-    renderer.samples_per_pixel = 10;
+    renderer.samples_per_pixel = 100;
+    renderer.ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
