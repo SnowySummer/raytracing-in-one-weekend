@@ -4,6 +4,8 @@
 #include <Framebuffer.hpp>
 #include <Camera/Camera.hpp>
 #include <Camera/PinholeCamera.hpp>
+#include <Material/Material.hpp>
+#include <Material/Lambertian.hpp>
 #include <Hittable/Hittable.hpp>
 #include <Hittable/HittableList.hpp>
 #include <Hittable/Sphere.hpp>
@@ -16,8 +18,7 @@ void rtiow_scene1(
     std::shared_ptr<Hittable>& world
 ) {
     // Setup main PRNG
-    PRNG prng;
-    prng.set_seed(1337);
+    constexpr uint32_t prng_seed = 1337;
 
     // Setup renderer
     renderer.samples_per_pixel = 100;
@@ -28,14 +29,17 @@ void rtiow_scene1(
 
     // Setup camera
     std::shared_ptr<PinholeCamera> pinhole_camera = std::make_shared<PinholeCamera>();
-    pinhole_camera->prng.set_seed(prng.rand());
+    pinhole_camera->prng.set_seed(prng_seed);
     pinhole_camera->setup(framebuffer);
     camera = pinhole_camera;
 
     // Setup scene
+    std::shared_ptr<Material> ground_mat = std::make_shared<Lambertian>(vec4(0.8f, 0.8f, 0.0f));
+    std::shared_ptr<Material> sphere_mat = std::make_shared<Lambertian>(vec4(0.1f, 0.2f, 0.5f));
+
     std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, 0.0f, -1.0f), 0.5f));
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -100.5f, -1.0f), 100.0f));
+    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
+    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, 0.0f, -1.0f), 0.5f, sphere_mat));
     world = hittable_l;
 }
 

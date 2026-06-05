@@ -53,8 +53,12 @@ private:
             return (1.0f - t) * vec4(1.0f, 1.0f, 1.0f) + t * vec4(0.5f, 0.7f, 1.0f);
         }
 
+        // Perform scattering
+        ScatterRecord srecord;
+        if (!record.mat->ray_scatter(prng, ray, record, srecord)) return vec4(0.0f, 0.0f, 0.0f);
+
         // Render hittable
-        return 0.5f * ray_value(Ray(record.p, record.n + prng.on_sphere()), ray_depth-1, world);
+        return srecord.attenuation * ray_value(srecord.scatter_ray, ray_depth-1, world);
     }
 };
 

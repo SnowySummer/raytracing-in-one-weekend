@@ -6,17 +6,20 @@
 #include <common/Interval.hpp>
 #include <common/vec4.hpp>
 #include <common/Ray.hpp>
+#include <Material/Material.hpp>
 #include <HitRecord.hpp>
 
 class Sphere : public Hittable {
 public:
     vec4 center;
     float radius;
+    std::shared_ptr<Material> mat;
 
 public:
     // Sphere constructor
-    Sphere() : center(vec4(0.0f, 0.0f, 0.0f)), radius(1.0f) {}
-    Sphere(vec4 _center, float _radius) : center(_center), radius(_radius) {}
+    Sphere() : center(vec4(0.0f, 0.0f, 0.0f)), radius(1.0f), mat(nullptr) {}
+    Sphere(vec4 _center, float _radius, std::shared_ptr<Material> _mat) :
+    center(_center), radius(_radius), mat(_mat) {}
 
     // Ray intersection
     bool ray_hit(Ray ray, Interval interval, HitRecord& record) const override {
@@ -39,6 +42,7 @@ public:
         record.p = ray.at(t);
         vec4 outward_normal = (record.p - center) / radius;
         record.set_front_face(ray, outward_normal);
+        record.mat = mat;
 
         return true;
     }

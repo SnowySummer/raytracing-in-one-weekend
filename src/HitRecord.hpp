@@ -4,12 +4,17 @@
 #include <common/vec4.hpp>
 #include <common/Ray.hpp>
 
+#include <memory>
+
+class Material;
+
 class HitRecord {
 public:
     float t;
     vec4 p;
     vec4 n;
     bool front_face;
+    std::shared_ptr<Material> mat;
 
 public:
     // Automatic set front face
