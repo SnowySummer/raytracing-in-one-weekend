@@ -1,11 +1,11 @@
-#include <Framebuffer.hpp>
-#include <Camera/PinholeCamera.hpp>
-#include <Hittable/HittableList.hpp>
-#include <Hittable/Sphere.hpp>
 #include <Renderer.hpp>
+#include <Framebuffer.hpp>
+#include <Camera/Camera.hpp>
+#include <Hittable/Hittable.hpp>
 #include <PostProcessing.hpp>
 #include <io/FramebufferExport.hpp>
 #include <memory>
+#include <string>
 
 #include <../scene/rtiow_scene_l.hpp>
 

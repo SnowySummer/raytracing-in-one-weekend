@@ -11,16 +11,17 @@ public:
     float refraction_index;
 
 public:
-    // Lambertian constructor
+    // Dielectric constructor
     Dielectric() : refraction_index(1.0f) {}
     Dielectric(float _refraction_index) : refraction_index(_refraction_index) {}
 
     // Ray scattering
     bool ray_scatter(PRNG& prng, Ray ray, HitRecord record, ScatterRecord& srec) const override {
+        // Set attenuation
         srec.attenuation = vec4(1.0f, 1.0f, 1.0f);
 
+        // Select ray to be scattered
         float ri = record.front_face ? 1.0f / refraction_index : refraction_index;
-
         float cos_theta = vec4::dot(-ray.direction, record.n);
         float sin_theta = std::sqrt(1.0f - cos_theta*cos_theta);
         if (sin_theta * ri < 1 && reflectance(cos_theta, ri) < prng.randf()) {
@@ -36,6 +37,7 @@ public:
     }
 
 private:
+    // Schlick approximation for reflectance
     static float reflectance(float cos_theta, float ri) {
         float r0 = (1.0f - ri) / (1.0f + ri);
         r0 = r0*r0;

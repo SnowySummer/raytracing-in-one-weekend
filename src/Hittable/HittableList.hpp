@@ -15,7 +15,7 @@ public:
     std::vector<std::shared_ptr<Hittable>> hittable_l;
 
 public:
-    // Sphere constructor
+    // HittableList constructor
     HittableList() : hittable_l(std::vector<std::shared_ptr<Hittable>>()) {}
 
     // Manage hittable list

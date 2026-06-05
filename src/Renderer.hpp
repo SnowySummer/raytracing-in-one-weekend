@@ -1,9 +1,9 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
-#include <common/PRNG.hpp>
 #include <common/Interval.hpp>
 #include <common/vec4.hpp>
+#include <common/PRNG.hpp>
 #include <common/Ray.hpp>
 #include <Framebuffer.hpp>
 #include <Camera/Camera.hpp>
@@ -37,11 +37,13 @@ public:
                     color += this->ray_value(ray, ray_maxdepth, world);
                 }
                 color /= samples_per_pixel;
+
+                // Update framebuffer
                 framebuffer.get(x, y) = color;
             }
         }
 
-        printf("\n");
+        printf("\e[0K\r[RENDER] finished\n");
     }
 
 private:
