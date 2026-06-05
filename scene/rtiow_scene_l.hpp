@@ -6,6 +6,7 @@
 #include <Camera/PinholeCamera.hpp>
 #include <Material/Material.hpp>
 #include <Material/Lambertian.hpp>
+#include <Material/Metal.hpp>
 #include <Hittable/Hittable.hpp>
 #include <Hittable/HittableList.hpp>
 #include <Hittable/Sphere.hpp>
@@ -36,11 +37,16 @@ void rtiow_scene1(
 
     // Setup scene
     std::shared_ptr<Material> ground_mat = std::make_shared<Lambertian>(vec4(0.8f, 0.8f, 0.0f));
-    std::shared_ptr<Material> sphere_mat = std::make_shared<Lambertian>(vec4(0.1f, 0.2f, 0.5f));
+    std::shared_ptr<Material> center_mat = std::make_shared<Lambertian>(vec4(0.1f, 0.2f, 0.5f));
+    std::shared_ptr<Material> left_mat   = std::make_shared<Metal>(vec4(0.8f, 0.8f, 0.8f), 0.3f);
+    std::shared_ptr<Material> right_mat  = std::make_shared<Metal>(vec4(0.8f, 0.6f, 0.2f), 1.0f);
 
     std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, 0.0f, -1.0f), 0.5f, sphere_mat));
+    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
+    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f,    0.0f, -1.0f), 0.5f, center_mat));
+    hittable_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.5f, left_mat));
+    hittable_l->add(std::make_shared<Sphere>(vec4( 1.0f,    0.0f, -1.0f), 0.5f, right_mat));
+
     world = hittable_l;
 }
 

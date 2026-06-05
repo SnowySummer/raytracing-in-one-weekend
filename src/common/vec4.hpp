@@ -36,6 +36,10 @@ public:
         );
     }
 
+    static vec4 reflect(vec4 u, vec4 n) {
+        return u - 2.0f * vec4::dot(u, n) * n;
+    }
+
     // Operator overload
     friend vec4  operator+(vec4 u);
     friend vec4  operator-(vec4 u);
