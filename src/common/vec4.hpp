@@ -39,6 +39,13 @@ public:
     static vec4 reflect(vec4 u, vec4 n) {
         return u - 2.0f * vec4::dot(u, n) * n;
     }
+    static vec4 refract(vec4 u, vec4 n, float ri) {
+        float cos_theta = vec4::dot(-u, n);
+        vec4 rt_perp = ri * (u + cos_theta*n);
+        if (1 < rt_perp.len2()) rt_perp = vec4::normalise(rt_perp);
+        vec4 rt_parallel = std::sqrt(1 - rt_perp.len2())* -n;
+        return rt_perp + rt_parallel;
+    }
 
     // Operator overload
     friend vec4  operator+(vec4 u);

@@ -16,7 +16,7 @@ int main() {
     Framebuffer framebuffer;
     std::shared_ptr<Camera> camera;
     std::shared_ptr<Hittable> world;
-    rtiow_scene1(renderer, framebuffer, camera, world);
+    rtiow_scene4(renderer, framebuffer, camera, world);
 
     // Render
     renderer.render(framebuffer, camera, world);
