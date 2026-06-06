@@ -19,7 +19,11 @@ public:
     HittableList() : hittable_l(std::vector<std::shared_ptr<Hittable>>()) {}
 
     // Manage hittable list
-    void add(std::shared_ptr<Hittable> hittable) { hittable_l.push_back(hittable); }
+    void add(std::shared_ptr<Hittable> hittable) {
+        hittable_l.push_back(hittable);
+        bbox = BBox(bbox, hittable->bbox);
+    }
+    size_t size() const { return hittable_l.size(); }
 
     // Ray intersection
     bool ray_hit(Ray ray, Interval interval, HitRecord& record) const override {

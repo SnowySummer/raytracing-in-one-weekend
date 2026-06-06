@@ -19,9 +19,17 @@ public:
     // Sphere constructor
     Sphere() : center_ray(Ray(vec4(0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f))), radius(1.0f), mat(nullptr) {}
     Sphere(vec4 _center, float _radius, std::shared_ptr<Material> _mat) :
-    center_ray(Ray(_center, vec4(0.0f, 0.0f, 0.0f))), radius(_radius), mat(_mat) {}
+    center_ray(Ray(_center, vec4(0.0f, 0.0f, 0.0f))), radius(_radius), mat(_mat) {
+        vec4 sphere_bbox_radius = vec4(radius, radius, radius);
+        bbox = BBox(_center - sphere_bbox_radius, _center + sphere_bbox_radius);
+    }
     Sphere(vec4 center1, vec4 center2, float _radius, std::shared_ptr<Material> _mat) :
-    center_ray(Ray(center1, center2 - center1)), radius(_radius), mat(_mat) {}
+    center_ray(Ray(center1, center2 - center1)), radius(_radius), mat(_mat) {
+        vec4 sphere_bbox_radius = vec4(radius, radius, radius);
+        BBox bbox1 = BBox(center1 - sphere_bbox_radius, center1 + sphere_bbox_radius);
+        BBox bbox2 = BBox(center2 - sphere_bbox_radius, center2 + sphere_bbox_radius);
+        bbox = BBox(bbox1, bbox2);
+    }
 
 
     // Ray intersection

@@ -4,8 +4,12 @@
 #include <common/Interval.hpp>
 #include <common/Ray.hpp>
 #include <HitRecord.hpp>
+#include <BBox.hpp>
 
 class Hittable {
+public:
+    BBox bbox;
+
 public:
     // Hittable virtual destructor
     virtual ~Hittable() {}

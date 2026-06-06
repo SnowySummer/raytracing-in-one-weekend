@@ -14,6 +14,9 @@ public:
     // Bounds checking
     bool surrounds(float t) { return min <  t && t <  max; }
     bool contains(float t)  { return min <= t && t <= max; }
+
+    // Size
+    float size() const { return max - min; }
 };
 
 #endif
