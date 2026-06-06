@@ -8,6 +8,7 @@
 #include <string>
 
 #include <../scene/rtiow_scene_l.hpp>
+#include <../scene/rttnw_scene_l.hpp>
 
 int main() {
 
@@ -16,7 +17,7 @@ int main() {
     Framebuffer framebuffer;
     std::shared_ptr<Camera> camera;
     std::shared_ptr<Hittable> world;
-    rtiow_scene5(renderer, framebuffer, camera, world);
+    rttnw_scene1(renderer, framebuffer, camera, world);
 
     // Render
     renderer.render(framebuffer, camera, world);

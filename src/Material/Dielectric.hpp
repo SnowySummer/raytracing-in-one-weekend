@@ -31,7 +31,7 @@ public:
         } else {
             // Reflect ray
             vec4 scatter_direction = vec4::normalise(vec4::reflect(ray.direction, record.n));
-            srec.scatter_ray = Ray(record.p, scatter_direction);
+            srec.scatter_ray = Ray(record.p, scatter_direction, ray.time);
         }
         return true;
     }

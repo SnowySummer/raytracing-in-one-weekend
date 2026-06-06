@@ -11,18 +11,24 @@
 
 class Sphere : public Hittable {
 public:
-    vec4 center;
+    Ray center_ray;
     float radius;
     std::shared_ptr<Material> mat;
 
 public:
     // Sphere constructor
-    Sphere() : center(vec4(0.0f, 0.0f, 0.0f)), radius(1.0f), mat(nullptr) {}
+    Sphere() : center_ray(Ray(vec4(0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f))), radius(1.0f), mat(nullptr) {}
     Sphere(vec4 _center, float _radius, std::shared_ptr<Material> _mat) :
-    center(_center), radius(_radius), mat(_mat) {}
+    center_ray(Ray(_center, vec4(0.0f, 0.0f, 0.0f))), radius(_radius), mat(_mat) {}
+    Sphere(vec4 center1, vec4 center2, float _radius, std::shared_ptr<Material> _mat) :
+    center_ray(Ray(center1, center2 - center1)), radius(_radius), mat(_mat) {}
+
 
     // Ray intersection
     bool ray_hit(Ray ray, Interval interval, HitRecord& record) const override {
+        // Set center point at time
+        vec4 center = center_ray.at(ray.time);
+
         // Check line intersection
         float a = ray.direction.len2();
         float b = vec4::dot(ray.origin - center, ray.direction);

@@ -84,7 +84,10 @@ public:
         vec4 camera_offset = 0.5f * prng.square();
         ray_origin += camera_offset[0]*camera_right + camera_offset[1]*camera_up;
 
-        return Ray(ray_origin, vec4::normalise(ray_viewport - ray_origin));
+        // Apply motion blur
+        float time = prng.randf();
+
+        return Ray(ray_origin, vec4::normalise(ray_viewport - ray_origin), time);
     }
 };
 

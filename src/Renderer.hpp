@@ -7,7 +7,10 @@
 #include <common/Ray.hpp>
 #include <Framebuffer.hpp>
 #include <Camera/Camera.hpp>
+#include <Material/Material.hpp>
 #include <Hittable/Hittable.hpp>
+#include <HitRecord.hpp>
+#include <ScatterRecord.hpp>
 #include <cstdio>
 #include <memory>
 
