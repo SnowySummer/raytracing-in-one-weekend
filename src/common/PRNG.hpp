@@ -33,6 +33,9 @@ public:
     float randf(float min, float max) {
         return min + (max-min) * this->randf();
     }
+    int randi(float min, float max) {
+        return std::floor(randf(min, max+1));
+    }
 
     // 2D sampling
     vec4 square() {

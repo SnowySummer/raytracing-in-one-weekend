@@ -17,6 +17,7 @@
 #include <Texture/Texture.hpp>
 #include <Texture/CheckerBoardTexture.hpp>
 #include <Texture/ImageTexture.hpp>
+#include <Texture/NoiseTexture.hpp>
 #include <memory>
 
 void rttnw_scene1(
@@ -274,6 +275,44 @@ void rttnw_scene4(
     std::shared_ptr<Texture> earth_tex = std::make_shared<ImageTexture>("../img/earthmap.jpg");
     std::shared_ptr<Material> earth_mat = std::make_shared<Lambertian>(earth_tex);
     world = std::make_shared<Sphere>(vec4(0.0f, 0.0f, 0.0f), 2.0f, earth_mat);
+}
+
+void rttnw_scene5(
+    Renderer& renderer,
+    Framebuffer& framebuffer,
+    std::shared_ptr<Camera>& camera,
+    std::shared_ptr<Hittable>& world
+) {
+    // Setup main PRNG
+    constexpr uint32_t prng_seed = 1337;
+    PRNG prng = PRNG(prng_seed);
+
+    // Setup renderer
+    renderer.prng.set_seed(prng_seed);
+    renderer.samples_per_pixel = 100;
+    renderer.ray_maxdepth = 10;
+
+    // Setup framebuffer
+    framebuffer = Framebuffer(400, 225);
+
+    // Setup camera
+    std::shared_ptr<PinholeCamera> pinhole_camera = std::make_shared<PinholeCamera>();
+    pinhole_camera->prng.set_seed(prng_seed);
+    pinhole_camera->eye = vec4(13.0f, 2.0f, 3.0f);
+    pinhole_camera->direction = vec4(-13.0f, -2.0f, -3.0f);
+    pinhole_camera->vfov = 1.0f / 9.0f * M_PI;
+    pinhole_camera->setup(framebuffer);
+    camera = pinhole_camera;
+
+    // Setup scene
+    std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
+
+    PRNG noise_texture_prng = PRNG(prng_seed);
+    std::shared_ptr<Texture> perlin_tex = std::make_shared<NoiseTexture>(prng, 4);
+    std::shared_ptr<Material> perlin_mat = std::make_shared<Lambertian>(perlin_tex);
+    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, 0.0f), 1000.0f, perlin_mat));
+    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, 2.0f, 0.0f), 2.0f, perlin_mat));
+    world = hittable_l;
 }
 
 #endif
