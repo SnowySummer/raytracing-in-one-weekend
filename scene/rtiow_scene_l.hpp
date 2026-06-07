@@ -1,17 +1,20 @@
 #ifndef SCENE__RTIOW_SCENE_L_HPP
 #define SCENE__RTIOW_SCENE_L_HPP
 
-#include <Framebuffer.hpp>
+#include <common/vec4.hpp>
+#include <common/PRNG.hpp>
 #include <Camera/Camera.hpp>
-#include <Camera/PinholeCamera.hpp>
 #include <Camera/LensCamera.hpp>
-#include <Material/Material.hpp>
-#include <Material/Lambertian.hpp>
-#include <Material/Metal.hpp>
-#include <Material/Dielectric.hpp>
-#include <Geometry/Geometry.hpp>
+#include <Camera/PinholeCamera.hpp>
 #include <Geometry/collection/GeometryList.hpp>
 #include <Geometry/primitive/Sphere.hpp>
+#include <Geometry/Geometry.hpp>
+#include <Material/Dielectric.hpp>
+#include <Material/Lambertian.hpp>
+#include <Material/Material.hpp>
+#include <Material/Metal.hpp>
+#include <Framebuffer.hpp>
+#include <cstdint>
 #include <memory>
 
 void rtiow_scene1(

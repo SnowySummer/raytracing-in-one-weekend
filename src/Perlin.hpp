@@ -1,8 +1,11 @@
 #ifndef PERLIN_HPP
 #define PERLIN_HPP
 
+#include <common/vec4.hpp>
 #include <common/PRNG.hpp>
 
+#define __USE_MATH_DEFINES
+#include <cmath>
 #include <algorithm>
 
 class Perlin {

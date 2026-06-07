@@ -3,6 +3,9 @@
 
 #include <Framebuffer.hpp>
 
+#define __USE_MATH_DEFINES
+#include <cmath>
+
 class PostProcessing {
 public:
     // Gamma correction
