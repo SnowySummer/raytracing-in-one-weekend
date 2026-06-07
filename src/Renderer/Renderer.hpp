@@ -8,7 +8,7 @@
 #include <Framebuffer.hpp>
 #include <Camera/Camera.hpp>
 #include <Material/Material.hpp>
-#include <Hittable/Hittable.hpp>
+#include <Geometry/Geometry.hpp>
 #include <HitRecord.hpp>
 #include <ScatterRecord.hpp>
 #include <cstdio>
@@ -25,7 +25,7 @@ public:
     Renderer() : prng(), samples_per_pixel(1), ray_maxdepth(1) {}
 
     // Main render function
-    void render(Framebuffer& framebuffer, const std::shared_ptr<Camera> camera, std::shared_ptr<Hittable>& world) {
+    void render(Framebuffer& framebuffer, const std::shared_ptr<Camera> camera, std::shared_ptr<Geometry>& world) {
         // Per-pixel rendering
         for (int y = 0; y < framebuffer.height; y++) {
             // Log line
@@ -51,7 +51,7 @@ public:
 
 private:
     // Get ray value
-    vec4 ray_value(Ray ray, int ray_depth, std::shared_ptr<Hittable>& world) {
+    vec4 ray_value(Ray ray, int ray_depth, std::shared_ptr<Geometry>& world) {
         // Recursion check
         if (ray_depth <= 0) return vec4(0.0f, 0.0f, 0.0f);
         

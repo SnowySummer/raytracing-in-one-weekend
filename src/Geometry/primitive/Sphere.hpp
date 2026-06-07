@@ -1,7 +1,7 @@
-#ifndef HITTABLE__SPHERE_HPP
-#define HITTABLE__SPHERE_HPP
+#ifndef GEOMETRY__PRIMITIVE__SPHERE_HPP
+#define GEOMETRY__PRIMITIVE__SPHERE_HPP
 
-#include "Hittable.hpp"
+#include "../Geometry.hpp"
 
 #include <common/Interval.hpp>
 #include <common/vec4.hpp>
@@ -9,7 +9,7 @@
 #include <Material/Material.hpp>
 #include <HitRecord.hpp>
 
-class Sphere : public Hittable {
+class Sphere : public Geometry {
 public:
     Ray center_ray;
     float radius;

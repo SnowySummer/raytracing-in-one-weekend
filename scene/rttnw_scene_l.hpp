@@ -13,11 +13,11 @@
 #include <Material/Lambertian.hpp>
 #include <Material/Metal.hpp>
 #include <Material/Dielectric.hpp>
-#include <Hittable/Hittable.hpp>
-#include <Hittable/HittableList.hpp>
-#include <Hittable/BVH.hpp>
-#include <Hittable/Sphere.hpp>
-#include <Hittable/Quad.hpp>
+#include <Geometry/Geometry.hpp>
+#include <Geometry/collection/GeometryList.hpp>
+#include <Geometry/collection/BVH.hpp>
+#include <Geometry/primitive/Quad.hpp>
+#include <Geometry/primitive/Sphere.hpp>
 #include <Texture/Texture.hpp>
 #include <Texture/CheckerBoardTexture.hpp>
 #include <Texture/ImageTexture.hpp>
@@ -28,7 +28,7 @@ void rttnw_scene1(
     std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
-    std::shared_ptr<Hittable>& world
+    std::shared_ptr<Geometry>& world
 ) {
     // Setup main PRNG
     constexpr uint32_t prng_seed = 1337;
@@ -55,7 +55,7 @@ void rttnw_scene1(
     camera = lens_camera;
 
     // Setup scene
-    std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
+    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Material> ground_mat = std::make_shared<Lambertian>(vec4(0.5f, 0.5f, 0.5f));
     hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, -1.0f), 1000.0f, ground_mat));
@@ -102,7 +102,7 @@ void rttnw_scene2(
     std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
-    std::shared_ptr<Hittable>& world
+    std::shared_ptr<Geometry>& world
 ) {
     // Setup main PRNG
     constexpr uint32_t prng_seed = 1337;
@@ -129,7 +129,7 @@ void rttnw_scene2(
     camera = lens_camera;
 
     // Setup scene
-    std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
+    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Material> ground_mat = std::make_shared<Lambertian>(vec4(0.5f, 0.5f, 0.5f));
     hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, -1.0f), 1000.0f, ground_mat));
@@ -178,7 +178,7 @@ void rttnw_scene3(
     std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
-    std::shared_ptr<Hittable>& world
+    std::shared_ptr<Geometry>& world
 ) {
     // Setup main PRNG
     constexpr uint32_t prng_seed = 1337;
@@ -205,7 +205,7 @@ void rttnw_scene3(
     camera = lens_camera;
 
     // Setup scene
-    std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
+    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Texture> ground_tex = std::make_shared<CheckerBoardTexture>(0.32, vec4(0.2f, 0.3f, 0.1f), vec4(0.9f, 0.9f, 0.9f));
     std::shared_ptr<Material> ground_mat = std::make_shared<Lambertian>(ground_tex);
@@ -255,7 +255,7 @@ void rttnw_scene4(
     std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
-    std::shared_ptr<Hittable>& world
+    std::shared_ptr<Geometry>& world
 ) {
     // Setup main PRNG
     constexpr uint32_t prng_seed = 1337;
@@ -289,7 +289,7 @@ void rttnw_scene5(
     std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
-    std::shared_ptr<Hittable>& world
+    std::shared_ptr<Geometry>& world
 ) {
     // Setup main PRNG
     constexpr uint32_t prng_seed = 1337;
@@ -314,7 +314,7 @@ void rttnw_scene5(
     camera = pinhole_camera;
 
     // Setup scene
-    std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
+    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
 
     PRNG noise_texture_prng = PRNG(prng_seed);
     std::shared_ptr<Texture> perlin_tex = std::make_shared<NoiseTexture>(prng, 4);
@@ -328,7 +328,7 @@ void rttnw_scene6(
     std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
-    std::shared_ptr<Hittable>& world
+    std::shared_ptr<Geometry>& world
 ) {
     // Setup main PRNG
     constexpr uint32_t prng_seed = 1337;
@@ -353,7 +353,7 @@ void rttnw_scene6(
     camera = pinhole_camera;
 
     // Setup scene
-    std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
+    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Material> left_red     = std::make_shared<Lambertian>(vec4(1.0f, 0.2f, 0.2f));
     std::shared_ptr<Material> back_green   = std::make_shared<Lambertian>(vec4(0.2f, 1.0f, 0.2f));
@@ -373,7 +373,7 @@ void rttnw_scene7(
     std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
-    std::shared_ptr<Hittable>& world
+    std::shared_ptr<Geometry>& world
 ) {
     // Setup main PRNG
     constexpr uint32_t prng_seed = 1337;
@@ -398,7 +398,7 @@ void rttnw_scene7(
     camera = pinhole_camera;
 
     // Setup scene
-    std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
+    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
 
     PRNG noise_texture_prng = PRNG(prng_seed);
     std::shared_ptr<Texture> perlin_tex = std::make_shared<NoiseTexture>(prng, 4);
@@ -416,7 +416,7 @@ void rttnw_scene8(
     std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
-    std::shared_ptr<Hittable>& world
+    std::shared_ptr<Geometry>& world
 ) {
     // Setup main PRNG
     constexpr uint32_t prng_seed = 1337;
@@ -441,7 +441,7 @@ void rttnw_scene8(
     camera = pinhole_camera;
 
     // Setup scene
-    std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
+    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Material> red   = std::make_shared<Lambertian>(vec4(0.65f, 0.05f, 0.05f));
     std::shared_ptr<Material> white = std::make_shared<Lambertian>(vec4(0.73f, 0.73f, 0.73f));

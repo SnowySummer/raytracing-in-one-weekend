@@ -1,26 +1,26 @@
-#ifndef HITTABLE__BVH_HPP
-#define HITTABLE__BVH_HPP
+#ifndef GEOMETRY__COLLECTION__BVH_HPP
+#define GEOMETRY__COLLECTION__BVH_HPP
 
-#include "Hittable.hpp"
+#include "../Geometry.hpp"
 
 #include <common/Interval.hpp>
 #include <common/vec4.hpp>
 #include <common/Ray.hpp>
-#include <Hittable/HittableList.hpp>
+#include <Geometry/collection/GeometryList.hpp>
 #include <HitRecord.hpp>
 #include <memory>
 #include <vector>
 
-class BVH : public Hittable {
+class BVH : public Geometry {
 public:
-    std::shared_ptr<Hittable> left;
-    std::shared_ptr<Hittable> right;
+    std::shared_ptr<Geometry> left;
+    std::shared_ptr<Geometry> right;
 
 public:
     // BVH constructor
     BVH() {}
-    BVH(std::shared_ptr<HittableList> hittable_l) : BVH(hittable_l->hittable_l, 0, hittable_l->size()) {}
-    BVH(std::vector<std::shared_ptr<Hittable>>& hittable_l, int start, int end) {
+    BVH(std::shared_ptr<GeometryList> hittable_l) : BVH(hittable_l->geometry_l, 0, hittable_l->size()) {}
+    BVH(std::vector<std::shared_ptr<Geometry>>& hittable_l, int start, int end) {
         // Build BBox
         for (int i = start; i < end; i++) {
             bbox = BBox(bbox, hittable_l[i]->bbox);
@@ -47,7 +47,7 @@ public:
         }
 
         // Select comparator and sort
-        bool (*comparator)(std::shared_ptr<Hittable>,std::shared_ptr<Hittable>) =
+        bool (*comparator)(std::shared_ptr<Geometry>,std::shared_ptr<Geometry>) =
             (long_axis == 0) ? comparator_x
             : (long_axis == 1) ? comparator_y
             : comparator_z;
@@ -59,13 +59,13 @@ public:
         right = std::make_shared<BVH>(hittable_l, mid, end);
     }
 
-    static bool comparator_x(std::shared_ptr<Hittable> a, std::shared_ptr<Hittable> b) {
+    static bool comparator_x(std::shared_ptr<Geometry> a, std::shared_ptr<Geometry> b) {
         return a->bbox.axis[0].min < b->bbox.axis[0].min;
     }
-    static bool comparator_y(std::shared_ptr<Hittable> a, std::shared_ptr<Hittable> b) {
+    static bool comparator_y(std::shared_ptr<Geometry> a, std::shared_ptr<Geometry> b) {
         return a->bbox.axis[1].min < b->bbox.axis[1].min;
     }
-    static bool comparator_z(std::shared_ptr<Hittable> a, std::shared_ptr<Hittable> b) {
+    static bool comparator_z(std::shared_ptr<Geometry> a, std::shared_ptr<Geometry> b) {
         return a->bbox.axis[2].min < b->bbox.axis[2].min;
     }
 

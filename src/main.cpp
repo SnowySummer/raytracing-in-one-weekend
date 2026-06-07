@@ -1,7 +1,7 @@
 #include <Framebuffer.hpp>
 #include <Renderer/Renderer.hpp>
 #include <Camera/Camera.hpp>
-#include <Hittable/Hittable.hpp>
+#include <Geometry/Geometry.hpp>
 #include <PostProcessing.hpp>
 #include <io/FramebufferExport.hpp>
 #include <memory>
@@ -16,7 +16,7 @@ int main() {
     Framebuffer framebuffer;
     std::shared_ptr<Renderer> renderer;
     std::shared_ptr<Camera> camera;
-    std::shared_ptr<Hittable> world;
+    std::shared_ptr<Geometry> world;
     rttnw_scene8(renderer, framebuffer, camera, world);
 
     // Render

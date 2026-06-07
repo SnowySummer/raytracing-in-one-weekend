@@ -1,7 +1,7 @@
-#ifndef HITTABLE__QUAD_HPP
-#define HITTABLE__QUAD_HPP
+#ifndef GEOMETRY__PRIMITIVE__QUAD_HPP
+#define GEOMETRY__PRIMITIVE__QUAD_HPP
 
-#include "Hittable.hpp"
+#include "../Geometry.hpp"
 
 #include <common/Interval.hpp>
 #include <common/vec4.hpp>
@@ -9,7 +9,7 @@
 #include <Material/Material.hpp>
 #include <HitRecord.hpp>
 
-class Quad : public Hittable {
+class Quad : public Geometry {
 public:
     vec4 Q;
     vec4 u;
