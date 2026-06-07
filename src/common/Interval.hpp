@@ -17,6 +17,13 @@ public:
 
     // Size
     float size() const { return max - min; }
+
+    // Clamp values
+    float clamp(float t) {
+        if (t < min) return min;
+        if (max < t) return max;
+        return t;
+    }
 };
 
 #endif

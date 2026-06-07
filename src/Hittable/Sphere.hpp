@@ -56,9 +56,19 @@ public:
         record.p = ray.at(t);
         vec4 outward_normal = (record.p - center) / radius;
         record.set_front_face(ray, outward_normal);
+        this->set_uv(outward_normal, record.u, record.v);
         record.mat = mat;
 
         return true;
+    }
+
+private:
+    void set_uv(vec4 p, float& u, float &v) const {
+        float theta = std::acos(-p[1]);
+        float phi = M_PI + std::atan2(-p[2], p[0]);
+
+        u = phi / (2 * M_PI);
+        v = theta / M_PI;
     }
 };
 

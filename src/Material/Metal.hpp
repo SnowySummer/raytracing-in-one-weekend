@@ -8,18 +8,19 @@
 
 class Metal : public Material {
 public:
-    vec4 albedo;
+    std::shared_ptr<Texture> tex;
     float fuzz;
 
 public:
     // Metal constructor
-    Metal() : albedo(vec4()) {}
-    Metal(vec4 _albedo) : albedo(_albedo), fuzz(0.0f) {}
-    Metal(vec4 _albedo, float _fuzz) : albedo(_albedo), fuzz(_fuzz) {}
+    Metal() : tex(nullptr) {}
+    Metal(vec4 albedo) : tex(std::make_shared<SolidColorTexture>(albedo)), fuzz(0.0f) {}
+    Metal(vec4 albedo, float _fuzz) : tex(std::make_shared<SolidColorTexture>(albedo)), fuzz(_fuzz) {}
+    Metal(std::shared_ptr<Texture> _tex, float _fuzz) : tex(_tex), fuzz(_fuzz) {}
 
     // Ray scattering
     bool ray_scatter(PRNG& prng, Ray ray, HitRecord record, ScatterRecord& srec) const override {
-        srec.attenuation = albedo;
+        srec.attenuation = tex->value(record.u, record.v, record.p);
         vec4 scatter_direction = vec4::normalise(vec4::reflect(ray.direction, record.n) + fuzz * prng.on_sphere());
         srec.scatter_ray = Ray(record.p, scatter_direction, ray.time);
         return true;

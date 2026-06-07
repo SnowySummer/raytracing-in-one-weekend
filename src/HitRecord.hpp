@@ -13,6 +13,8 @@ public:
     float t;
     vec4 p;
     vec4 n;
+    float u;
+    float v;
     bool front_face;
     std::shared_ptr<Material> mat;
 
