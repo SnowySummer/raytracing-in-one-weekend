@@ -17,7 +17,7 @@ public:
         Interval(std::min(a[0], b[0]), std::max(a[0], b[0])),
         Interval(std::min(a[1], b[1]), std::max(a[1], b[1])),
         Interval(std::min(a[2], b[2]), std::max(a[2], b[2]))
-    } {}
+    } { pad_minimum(); }
     BBox(BBox bbox1, BBox bbox2) : axis{
         Interval(
             std::min(bbox1.axis[0].min, bbox2.axis[0].min),
@@ -31,7 +31,7 @@ public:
             std::min(bbox1.axis[2].min, bbox2.axis[2].min),
             std::max(bbox1.axis[2].max, bbox2.axis[2].max)
         )
-    } {}
+    } { pad_minimum(); }
 
     bool ray_hit(Ray ray, Interval interval) const {
         for (int i = 0; i < 3; i++) {
@@ -52,6 +52,14 @@ public:
         }
 
         return true;
+    }
+
+private:
+    void pad_minimum() {
+        float pad_min = 1e-4f;
+        for (int i = 0; i < 3; i++) {
+            if (axis[i].size() < pad_min) axis[i] = axis[i].expand(pad_min);
+        }
     }
 };
 

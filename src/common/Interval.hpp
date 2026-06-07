@@ -24,6 +24,11 @@ public:
         if (max < t) return max;
         return t;
     }
+
+    // Expand interval
+    Interval expand(float delta) {
+        return Interval(min - 0.5f * delta, max + 0.5f * delta);
+    }
 };
 
 #endif
