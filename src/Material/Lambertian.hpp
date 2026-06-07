@@ -20,6 +20,11 @@ public:
     Lambertian(vec4 albedo) : tex(std::make_shared<SolidColorTexture>(albedo)) {}
     Lambertian(std::shared_ptr<Texture> _tex) : tex(_tex) {}
 
+    // Light emission
+    vec4 light_emission(float u, float v, vec4 p) override {
+        return vec4(0.0f, 0.0f, 0.0f);
+    }
+    
     // Ray scattering
     bool ray_scatter(PRNG& prng, Ray ray, HitRecord record, ScatterRecord& srec) const override {
         srec.attenuation = tex->value(record.u, record.v, record.p);

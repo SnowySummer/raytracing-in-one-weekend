@@ -1,12 +1,15 @@
 #ifndef SCENE__RTTNW_SCENE_L_HPP
 #define SCENE__RTTNW_SCENE_L_HPP
 
-#include <Renderer.hpp>
 #include <Framebuffer.hpp>
+#include <Renderer/Renderer.hpp>
+#include <Renderer/RendererSkyBackground.hpp>
+#include <Renderer/RendererSolidBackground.hpp>
 #include <Camera/Camera.hpp>
 #include <Camera/PinholeCamera.hpp>
 #include <Camera/LensCamera.hpp>
 #include <Material/Material.hpp>
+#include <Material/DiffuseLight.hpp>
 #include <Material/Lambertian.hpp>
 #include <Material/Metal.hpp>
 #include <Material/Dielectric.hpp>
@@ -22,7 +25,7 @@
 #include <memory>
 
 void rttnw_scene1(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Hittable>& world
@@ -32,9 +35,10 @@ void rttnw_scene1(
     PRNG prng = PRNG(prng_seed);
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
@@ -95,7 +99,7 @@ void rttnw_scene1(
 }
 
 void rttnw_scene2(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Hittable>& world
@@ -105,9 +109,10 @@ void rttnw_scene2(
     PRNG prng = PRNG(prng_seed);
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
@@ -170,7 +175,7 @@ void rttnw_scene2(
 }
 
 void rttnw_scene3(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Hittable>& world
@@ -180,9 +185,10 @@ void rttnw_scene3(
     PRNG prng = PRNG(prng_seed);
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
@@ -246,7 +252,7 @@ void rttnw_scene3(
 }
 
 void rttnw_scene4(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Hittable>& world
@@ -256,9 +262,10 @@ void rttnw_scene4(
     PRNG prng = PRNG(prng_seed);
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
@@ -279,7 +286,7 @@ void rttnw_scene4(
 }
 
 void rttnw_scene5(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Hittable>& world
@@ -289,9 +296,10 @@ void rttnw_scene5(
     PRNG prng = PRNG(prng_seed);
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
@@ -317,7 +325,7 @@ void rttnw_scene5(
 }
 
 void rttnw_scene6(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Hittable>& world
@@ -327,9 +335,10 @@ void rttnw_scene6(
     PRNG prng = PRNG(prng_seed);
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 400);
@@ -359,5 +368,95 @@ void rttnw_scene6(
     hittable_l->add(std::make_shared<Quad>(vec4(-2.0f, -3.0f, 5.0f), vec4(4.0f, 0.0f,  0.0f), vec4(0.0f, 0.0f, -4.0f), lower_teal));
     world = hittable_l;
 }
+
+void rttnw_scene7(
+    std::shared_ptr<Renderer>& renderer,
+    Framebuffer& framebuffer,
+    std::shared_ptr<Camera>& camera,
+    std::shared_ptr<Hittable>& world
+) {
+    // Setup main PRNG
+    constexpr uint32_t prng_seed = 1337;
+    PRNG prng = PRNG(prng_seed);
+
+    // Setup renderer
+    renderer = std::make_shared<RendererSolidBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
+
+    // Setup framebuffer
+    framebuffer = Framebuffer(400, 225);
+
+    // Setup camera
+    std::shared_ptr<PinholeCamera> pinhole_camera = std::make_shared<PinholeCamera>();
+    pinhole_camera->prng.set_seed(prng_seed);
+    pinhole_camera->eye = vec4(26.0f, 3.0f, 6.0f);
+    pinhole_camera->direction = vec4(-26.0f, -1.0f, -6.0f);
+    pinhole_camera->vfov = 1.0f / 9.0f * M_PI;
+    pinhole_camera->setup(framebuffer);
+    camera = pinhole_camera;
+
+    // Setup scene
+    std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
+
+    PRNG noise_texture_prng = PRNG(prng_seed);
+    std::shared_ptr<Texture> perlin_tex = std::make_shared<NoiseTexture>(prng, 4);
+    std::shared_ptr<Material> perlin_mat = std::make_shared<Lambertian>(perlin_tex);
+    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, 0.0f), 1000.0f, perlin_mat));
+    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, 2.0f, 0.0f), 2.0f, perlin_mat));
+    
+    std::shared_ptr<Material> light = std::make_shared<DiffuseLight>(vec4(4.0f, 4.0f, 4.0f));
+    hittable_l->add(std::make_shared<Quad>(vec4(3.0f, 1.0f, -2.0f), vec4(2.0f, 0.0f, 0.0f), vec4(0.0f, 2.0f, 0.0f), light));
+    
+    world = hittable_l;
+}
+
+void rttnw_scene8(
+    std::shared_ptr<Renderer>& renderer,
+    Framebuffer& framebuffer,
+    std::shared_ptr<Camera>& camera,
+    std::shared_ptr<Hittable>& world
+) {
+    // Setup main PRNG
+    constexpr uint32_t prng_seed = 1337;
+    PRNG prng = PRNG(prng_seed);
+
+    // Setup renderer
+    renderer = std::make_shared<RendererSolidBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
+
+    // Setup framebuffer
+    framebuffer = Framebuffer(400, 400);
+
+    // Setup camera
+    std::shared_ptr<PinholeCamera> pinhole_camera = std::make_shared<PinholeCamera>();
+    pinhole_camera->prng.set_seed(prng_seed);
+    pinhole_camera->eye = vec4(278.0f, 278.0f, -800.0f);
+    pinhole_camera->direction = vec4(0.0f, 0.0f, 800.0f);
+    pinhole_camera->vfov = 2.0f / 9.0f * M_PI;
+    pinhole_camera->setup(framebuffer);
+    camera = pinhole_camera;
+
+    // Setup scene
+    std::shared_ptr<HittableList> hittable_l = std::make_shared<HittableList>();
+
+    std::shared_ptr<Material> red   = std::make_shared<Lambertian>(vec4(0.65f, 0.05f, 0.05f));
+    std::shared_ptr<Material> white = std::make_shared<Lambertian>(vec4(0.73f, 0.73f, 0.73f));
+    std::shared_ptr<Material> green = std::make_shared<Lambertian>(vec4(0.12f, 0.45f, 0.15f));
+    std::shared_ptr<Material> light = std::make_shared<DiffuseLight>(vec4(15.0f, 15.0f, 15.0f));
+
+    hittable_l->add(std::make_shared<Quad>(vec4(555.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), green));
+    hittable_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), red));
+    hittable_l->add(std::make_shared<Quad>(vec4(343.0f, 554.0f, 332.0f), vec4(-130.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, -105.0f), light));
+    hittable_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), white));
+    hittable_l->add(std::make_shared<Quad>(vec4(555.0f, 555.0f, 555.0f), vec4(-555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, -555.0f), white));
+    hittable_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f, 555.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f, 555.0f,    0.0f), white));
+
+    world = hittable_l;
+}
+
 
 #endif

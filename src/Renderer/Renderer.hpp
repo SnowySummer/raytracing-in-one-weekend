@@ -59,17 +59,24 @@ private:
         HitRecord record;
         if (!world->ray_hit(ray, Interval(1e-3f, INFINITY), record)) {
             // Render background
-            float t = 0.5f * (1.0f + ray.direction[1]);
-            return (1.0f - t) * vec4(1.0f, 1.0f, 1.0f) + t * vec4(0.5f, 0.7f, 1.0f);
+            return background(ray);
         }
+
+        // Keep emitted light
+        vec4 light_emit = record.mat->light_emission(record.u, record.v, record.p);
 
         // Perform scattering
         ScatterRecord srecord;
-        if (!record.mat->ray_scatter(prng, ray, record, srecord)) return vec4(0.0f, 0.0f, 0.0f);
+        if (!record.mat->ray_scatter(prng, ray, record, srecord)) {
+            return light_emit;
+        }
 
         // Render hittable
-        return srecord.attenuation * ray_value(srecord.scatter_ray, ray_depth-1, world);
+        vec4 scatter_value = srecord.attenuation * ray_value(srecord.scatter_ray, ray_depth-1, world);
+        return light_emit + scatter_value;
     }
+
+    virtual vec4 background(Ray ray) = 0;
 };
 
 #endif

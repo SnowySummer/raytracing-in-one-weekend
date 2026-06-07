@@ -1,5 +1,5 @@
-#include <Renderer.hpp>
 #include <Framebuffer.hpp>
+#include <Renderer/Renderer.hpp>
 #include <Camera/Camera.hpp>
 #include <Hittable/Hittable.hpp>
 #include <PostProcessing.hpp>
@@ -13,14 +13,14 @@
 int main() {
 
     // Setup scene
-    Renderer renderer;
     Framebuffer framebuffer;
+    std::shared_ptr<Renderer> renderer;
     std::shared_ptr<Camera> camera;
     std::shared_ptr<Hittable> world;
-    rttnw_scene6(renderer, framebuffer, camera, world);
+    rttnw_scene8(renderer, framebuffer, camera, world);
 
     // Render
-    renderer.render(framebuffer, camera, world);
+    renderer->render(framebuffer, camera, world);
     PostProcessing::gamma(framebuffer, 1.0f / 2.2f);
 
     // Export to PNG
