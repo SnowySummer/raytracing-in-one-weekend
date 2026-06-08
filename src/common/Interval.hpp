@@ -29,6 +29,15 @@ public:
     Interval expand(float delta) {
         return Interval(min - 0.5f * delta, max + 0.5f * delta);
     }
+
+    // Operator overload
+    friend Interval operator+(Interval interval, float t);
 };
+
+
+// Operator overload implementation
+inline Interval operator+(Interval interval, float t) {
+    return Interval(interval.min + t, interval.max + t);
+}
 
 #endif

@@ -29,7 +29,7 @@ public:
         // Per-pixel rendering
         for (int y = 0; y < framebuffer.height; y++) {
             // Log line
-            printf("\e[0K\r[RENDER] line %d/%d", y+1, framebuffer.height);
+            printf("\e[2K\r[RENDER] line %d/%d", y+1, framebuffer.height);
 
             // Render line
             for (int x = 0; x < framebuffer.width; x++) {
@@ -46,7 +46,7 @@ public:
             }
         }
 
-        printf("\e[0K\r[RENDER] finished\n");
+        printf("\e[2K\r[RENDER] finished\n");
     }
 
 private:

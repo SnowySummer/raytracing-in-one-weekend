@@ -13,6 +13,7 @@ public:
 public:
     // BBox constructor
     BBox() : axis{Interval(), Interval(), Interval()} {}
+    BBox(Interval x, Interval y, Interval z) : axis{x, y, z} { pad_minimum(); }
     BBox(vec4 a, vec4 b) : axis{
         Interval(std::min(a[0], b[0]), std::max(a[0], b[0])),
         Interval(std::min(a[1], b[1]), std::max(a[1], b[1])),
@@ -54,6 +55,9 @@ public:
         return true;
     }
 
+    // Operator overload
+    friend BBox operator+(BBox bbox, vec4 offset);
+
 private:
     void pad_minimum() {
         float pad_min = 1e-4f;
@@ -62,5 +66,15 @@ private:
         }
     }
 };
+
+
+// Operator overload implementation
+inline BBox operator+(BBox bbox, vec4 offset) {
+    return BBox(
+        bbox.axis[0] + offset[0],
+        bbox.axis[1] + offset[1],
+        bbox.axis[2] + offset[2]
+    );
+}
 
 #endif
