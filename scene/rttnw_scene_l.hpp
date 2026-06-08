@@ -17,6 +17,7 @@
 #include <Geometry/collection/Box.hpp>
 #include <Geometry/collection/BVH.hpp>
 #include <Geometry/collection/GeometryList.hpp>
+#include <Geometry/primitive/ConstantMedium.hpp>
 #include <Geometry/primitive/Quad.hpp>
 #include <Geometry/primitive/Sphere.hpp>
 #include <Geometry/transform/RotateY.hpp>
@@ -514,6 +515,63 @@ void rttnw_scene9(
     
     geometry_l->add(box1);
     geometry_l->add(box2);
+    
+    world = geometry_l;
+}
+
+void rttnw_scene10(
+    std::shared_ptr<Renderer>& renderer,
+    Framebuffer& framebuffer,
+    std::shared_ptr<Camera>& camera,
+    std::shared_ptr<Geometry>& world
+) {
+    // Setup main PRNG
+    constexpr uint32_t prng_seed = 1337;
+    PRNG prng = PRNG(prng_seed);
+
+    // Setup renderer
+    renderer = std::make_shared<RendererSolidBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
+
+    // Setup framebuffer
+    framebuffer = Framebuffer(400, 400);
+
+    // Setup camera
+    std::shared_ptr<PinholeCamera> pinhole_camera = std::make_shared<PinholeCamera>();
+    pinhole_camera->prng.set_seed(prng_seed);
+    pinhole_camera->eye = vec4(278.0f, 278.0f, -800.0f);
+    pinhole_camera->direction = vec4(0.0f, 0.0f, 800.0f);
+    pinhole_camera->vfov = 2.0f / 9.0f * M_PI;
+    pinhole_camera->setup(framebuffer);
+    camera = pinhole_camera;
+
+    // Setup scene
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
+
+    std::shared_ptr<Material> red   = std::make_shared<Lambertian>(vec4(0.65f, 0.05f, 0.05f));
+    std::shared_ptr<Material> white = std::make_shared<Lambertian>(vec4(0.73f, 0.73f, 0.73f));
+    std::shared_ptr<Material> green = std::make_shared<Lambertian>(vec4(0.12f, 0.45f, 0.15f));
+    std::shared_ptr<Material> light = std::make_shared<DiffuseLight>(vec4(7.0f, 7.0f, 7.0f));
+
+    geometry_l->add(std::make_shared<Quad>(vec4(555.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f, 555.0f), green));
+    geometry_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f, 555.0f), red));
+    geometry_l->add(std::make_shared<Quad>(vec4(113.0f, 554.0f, 127.0f), vec4( 330.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, 305.0f), light));
+    geometry_l->add(std::make_shared<Quad>(vec4(  0.0f, 555.0f,   0.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, 555.0f), white));
+    geometry_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, 555.0f), white));
+    geometry_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f, 555.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f, 555.0f,   0.0f), white));
+
+    std::shared_ptr<Geometry> box1 = Box(vec4(0.0f, 0.0f, 0.0f), vec4(165.0f, 330.0f, 165.0f), white);
+    box1 = std::make_shared<RotateY>(box1, 1.0f / 12.0f * M_PI);
+    box1 = std::make_shared<Translate>(box1, vec4(265.0f, 0.0f, 295.0f));
+    
+    std::shared_ptr<Geometry> box2 = Box(vec4(0.0f, 0.0f, 0.0f), vec4(165.0f, 165.0f, 165.0f), white);
+    box2 = std::make_shared<RotateY>(box2, -1.0f / 10.0f * M_PI);
+    box2 = std::make_shared<Translate>(box2, vec4(130.0f, 0.0f, 65.0f));
+    
+    geometry_l->add(std::make_shared<ConstantMedium>(box1, 0.01f, vec4(0.0f, 0.0f, 0.0f)));
+    geometry_l->add(std::make_shared<ConstantMedium>(box2, 0.01f, vec4(1.0f, 1.0f, 1.0f)));
     
     world = geometry_l;
 }

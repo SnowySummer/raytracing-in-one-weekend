@@ -45,7 +45,7 @@ public:
     }
 
     // Ray intersection
-    bool ray_hit(Ray ray, Interval interval, HitRecord& record) const override {
+    bool ray_hit(PRNG& prng, Ray ray, Interval interval, HitRecord& record) const override {
         // Rotate ray
         vec4 ray_origin = vec4(
             cos_theta * ray.origin[0] - sin_theta * ray.origin[2],
@@ -62,7 +62,7 @@ public:
         Ray rotate_ray = Ray(ray_origin, ray_direction, ray.time);
 
         // Check intersection
-        if (!geometry->ray_hit(rotate_ray, interval, record)) return false;
+        if (!geometry->ray_hit(prng, rotate_ray, interval, record)) return false;
 
         // Rotate record value
         record.p = vec4(

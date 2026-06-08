@@ -57,7 +57,7 @@ private:
         
         // Check hit
         HitRecord record;
-        if (!world->ray_hit(ray, Interval(1e-3f, INFINITY), record)) {
+        if (!world->ray_hit(prng, ray, Interval(1e-3f, INFINITY), record)) {
             // Render background
             return background(ray);
         }

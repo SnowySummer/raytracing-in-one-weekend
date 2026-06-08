@@ -19,12 +19,12 @@ public:
     }
 
     // Ray intersection
-    bool ray_hit(Ray ray, Interval interval, HitRecord& record) const override {
+    bool ray_hit(PRNG& prng, Ray ray, Interval interval, HitRecord& record) const override {
         // Offset ray
         Ray offset_ray = Ray(ray.origin - offset, ray.direction, ray.time);
 
         // Check intersection
-        if (!geometry->ray_hit(offset_ray, interval, record)) return false;
+        if (!geometry->ray_hit(prng, offset_ray, interval, record)) return false;
 
         // Offset record value
         record.p += offset;

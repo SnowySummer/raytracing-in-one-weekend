@@ -33,7 +33,7 @@ public:
 
 
     // Ray intersection
-    bool ray_hit(Ray ray, Interval interval, HitRecord& record) const override {
+    bool ray_hit(PRNG& prng, Ray ray, Interval interval, HitRecord& record) const override {
         // Set center point at time
         vec4 center = center_ray.at(ray.time);
 

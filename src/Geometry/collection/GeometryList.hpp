@@ -28,11 +28,11 @@ public:
     size_t size() const { return geometry_l.size(); }
 
     // Ray intersection
-    bool ray_hit(Ray ray, Interval interval, HitRecord& record) const override {
+    bool ray_hit(PRNG& prng, Ray ray, Interval interval, HitRecord& record) const override {
         bool is_hit = false;
         HitRecord temp_record;
         for (int i = 0; i < geometry_l.size(); i++) {
-            if (geometry_l[i]->ray_hit(ray, interval, temp_record)) {
+            if (geometry_l[i]->ray_hit(prng, ray, interval, temp_record)) {
                 is_hit = true;
                 interval.max = temp_record.t;
                 record = temp_record;

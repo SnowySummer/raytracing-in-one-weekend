@@ -70,15 +70,15 @@ public:
     }
 
     // Ray intersection
-    bool ray_hit(Ray ray, Interval interval, HitRecord& record) const override {
+    bool ray_hit(PRNG& prng, Ray ray, Interval interval, HitRecord& record) const override {
         // Check BBox hit
         if (!bbox.ray_hit(ray, interval)) return false;
 
         // Check left/right hit
-        bool left_hit = left->ray_hit(ray, interval, record);
+        bool left_hit = left->ray_hit(prng, ray, interval, record);
         bool right_hit;
-        if (left_hit) right_hit = right->ray_hit(ray, Interval(interval.min, record.t), record);
-        else right_hit = right->ray_hit(ray, interval, record);
+        if (left_hit) right_hit = right->ray_hit(prng, ray, Interval(interval.min, record.t), record);
+        else right_hit = right->ray_hit(prng, ray, interval, record);
 
         return left_hit || right_hit;
     }

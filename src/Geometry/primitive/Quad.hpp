@@ -39,7 +39,7 @@ public:
 
 
     // Ray intersection
-    bool ray_hit(Ray ray, Interval interval, HitRecord& record) const override {
+    bool ray_hit(PRNG& prng, Ray ray, Interval interval, HitRecord& record) const override {
         // Check for parallel rays
         if (std::fabs(vec4::dot(n, ray.direction)) < 1e-8f) return false;
 
