@@ -5,7 +5,7 @@
 #include <common/PRNG.hpp>
 #include <common/Ray.hpp>
 #include <HitRecord.hpp>
-#include <BBox.hpp>
+#include <Geometry/BBox.hpp>
 
 class Geometry {
 public:
