@@ -58,17 +58,17 @@ void rttnw_scene1(
     camera = lens_camera;
 
     // Setup scene
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Material> ground_mat = std::make_shared<Lambertian>(vec4(0.5f, 0.5f, 0.5f));
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, -1.0f), 1000.0f, ground_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, -1.0f), 1000.0f, ground_mat));
 
     std::shared_ptr<Material> material1 = std::make_shared<Dielectric>(1.5f);
     std::shared_ptr<Material> material2 = std::make_shared<Lambertian>(vec4(0.4f, 0.2f, 0.1f));
     std::shared_ptr<Material> material3 = std::make_shared<Metal>(vec4(0.7f, 0.6f, 0.5f));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f, 1.0f, 0.0f), 1.0f, material1));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-4.0f, 1.0f, 0.0f), 1.0f, material2));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 4.0f, 1.0f, 0.0f), 1.0f, material3));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f, 1.0f, 0.0f), 1.0f, material1));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-4.0f, 1.0f, 0.0f), 1.0f, material2));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 4.0f, 1.0f, 0.0f), 1.0f, material3));
 
     for (int a = -11; a < 11; a++) {
         for (int b = -11; b < 11; b++) {
@@ -94,11 +94,11 @@ void rttnw_scene1(
             }
 
             // Add sphere
-            hittable_l->add(std::make_shared<Sphere>(sphere_center1, sphere_center2, 0.2f, sphere_mat));
+            geometry_l->add(std::make_shared<Sphere>(sphere_center1, sphere_center2, 0.2f, sphere_mat));
         }
     }
 
-    world = hittable_l;
+    world = geometry_l;
 }
 
 void rttnw_scene2(
@@ -132,17 +132,17 @@ void rttnw_scene2(
     camera = lens_camera;
 
     // Setup scene
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Material> ground_mat = std::make_shared<Lambertian>(vec4(0.5f, 0.5f, 0.5f));
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, -1.0f), 1000.0f, ground_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, -1.0f), 1000.0f, ground_mat));
 
     std::shared_ptr<Material> material1 = std::make_shared<Dielectric>(1.5f);
     std::shared_ptr<Material> material2 = std::make_shared<Lambertian>(vec4(0.4f, 0.2f, 0.1f));
     std::shared_ptr<Material> material3 = std::make_shared<Metal>(vec4(0.7f, 0.6f, 0.5f));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f, 1.0f, 0.0f), 1.0f, material1));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-4.0f, 1.0f, 0.0f), 1.0f, material2));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 4.0f, 1.0f, 0.0f), 1.0f, material3));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f, 1.0f, 0.0f), 1.0f, material1));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-4.0f, 1.0f, 0.0f), 1.0f, material2));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 4.0f, 1.0f, 0.0f), 1.0f, material3));
 
     for (int a = -11; a < 11; a++) {
         for (int b = -11; b < 11; b++) {
@@ -168,11 +168,11 @@ void rttnw_scene2(
             }
 
             // Add sphere
-            hittable_l->add(std::make_shared<Sphere>(sphere_center1, sphere_center2, 0.2f, sphere_mat));
+            geometry_l->add(std::make_shared<Sphere>(sphere_center1, sphere_center2, 0.2f, sphere_mat));
         }
     }
 
-    std::shared_ptr<BVH> world_bvh = std::make_shared<BVH>(hittable_l);
+    std::shared_ptr<BVH> world_bvh = std::make_shared<BVH>(geometry_l);
 
     world = world_bvh;
 }
@@ -208,18 +208,18 @@ void rttnw_scene3(
     camera = lens_camera;
 
     // Setup scene
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Texture> ground_tex = std::make_shared<CheckerBoardTexture>(0.32, vec4(0.2f, 0.3f, 0.1f), vec4(0.9f, 0.9f, 0.9f));
     std::shared_ptr<Material> ground_mat = std::make_shared<Lambertian>(ground_tex);
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, -1.0f), 1000.0f, ground_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, -1.0f), 1000.0f, ground_mat));
 
     std::shared_ptr<Material> material1 = std::make_shared<Dielectric>(1.5f);
     std::shared_ptr<Material> material2 = std::make_shared<Lambertian>(vec4(0.4f, 0.2f, 0.1f));
     std::shared_ptr<Material> material3 = std::make_shared<Metal>(vec4(0.7f, 0.6f, 0.5f));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f, 1.0f, 0.0f), 1.0f, material1));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-4.0f, 1.0f, 0.0f), 1.0f, material2));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 4.0f, 1.0f, 0.0f), 1.0f, material3));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f, 1.0f, 0.0f), 1.0f, material1));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-4.0f, 1.0f, 0.0f), 1.0f, material2));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 4.0f, 1.0f, 0.0f), 1.0f, material3));
 
     for (int a = -11; a < 11; a++) {
         for (int b = -11; b < 11; b++) {
@@ -245,11 +245,11 @@ void rttnw_scene3(
             }
 
             // Add sphere
-            hittable_l->add(std::make_shared<Sphere>(sphere_center1, sphere_center2, 0.2f, sphere_mat));
+            geometry_l->add(std::make_shared<Sphere>(sphere_center1, sphere_center2, 0.2f, sphere_mat));
         }
     }
 
-    std::shared_ptr<BVH> world_bvh = std::make_shared<BVH>(hittable_l);
+    std::shared_ptr<BVH> world_bvh = std::make_shared<BVH>(geometry_l);
 
     world = world_bvh;
 }
@@ -317,14 +317,14 @@ void rttnw_scene5(
     camera = pinhole_camera;
 
     // Setup scene
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
 
     PRNG noise_texture_prng = PRNG(prng_seed);
     std::shared_ptr<Texture> perlin_tex = std::make_shared<NoiseTexture>(prng, 4);
     std::shared_ptr<Material> perlin_mat = std::make_shared<Lambertian>(perlin_tex);
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, 0.0f), 1000.0f, perlin_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, 2.0f, 0.0f), 2.0f, perlin_mat));
-    world = hittable_l;
+    geometry_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, 0.0f), 1000.0f, perlin_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(0.0f, 2.0f, 0.0f), 2.0f, perlin_mat));
+    world = geometry_l;
 }
 
 void rttnw_scene6(
@@ -356,7 +356,7 @@ void rttnw_scene6(
     camera = pinhole_camera;
 
     // Setup scene
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Material> left_red     = std::make_shared<Lambertian>(vec4(1.0f, 0.2f, 0.2f));
     std::shared_ptr<Material> back_green   = std::make_shared<Lambertian>(vec4(0.2f, 1.0f, 0.2f));
@@ -364,12 +364,12 @@ void rttnw_scene6(
     std::shared_ptr<Material> upper_orange = std::make_shared<Lambertian>(vec4(1.0f, 0.5f, 0.0f));
     std::shared_ptr<Material> lower_teal   = std::make_shared<Lambertian>(vec4(0.2f, 0.8f, 0.8f));
 
-    hittable_l->add(std::make_shared<Quad>(vec4(-3.0f, -2.0f, 5.0f), vec4(0.0f, 0.0f, -4.0f), vec4(0.0f, 4.0f,  0.0f), left_red));
-    hittable_l->add(std::make_shared<Quad>(vec4(-2.0f, -2.0f, 0.0f), vec4(4.0f, 0.0f,  0.0f), vec4(0.0f, 4.0f,  0.0f), back_green));
-    hittable_l->add(std::make_shared<Quad>(vec4( 3.0f, -2.0f, 1.0f), vec4(0.0f, 0.0f,  4.0f), vec4(0.0f, 4.0f,  0.0f), right_blue));
-    hittable_l->add(std::make_shared<Quad>(vec4(-2.0f,  3.0f, 1.0f), vec4(4.0f, 0.0f,  0.0f), vec4(0.0f, 0.0f,  4.0f), upper_orange));
-    hittable_l->add(std::make_shared<Quad>(vec4(-2.0f, -3.0f, 5.0f), vec4(4.0f, 0.0f,  0.0f), vec4(0.0f, 0.0f, -4.0f), lower_teal));
-    world = hittable_l;
+    geometry_l->add(std::make_shared<Quad>(vec4(-3.0f, -2.0f, 5.0f), vec4(0.0f, 0.0f, -4.0f), vec4(0.0f, 4.0f,  0.0f), left_red));
+    geometry_l->add(std::make_shared<Quad>(vec4(-2.0f, -2.0f, 0.0f), vec4(4.0f, 0.0f,  0.0f), vec4(0.0f, 4.0f,  0.0f), back_green));
+    geometry_l->add(std::make_shared<Quad>(vec4( 3.0f, -2.0f, 1.0f), vec4(0.0f, 0.0f,  4.0f), vec4(0.0f, 4.0f,  0.0f), right_blue));
+    geometry_l->add(std::make_shared<Quad>(vec4(-2.0f,  3.0f, 1.0f), vec4(4.0f, 0.0f,  0.0f), vec4(0.0f, 0.0f,  4.0f), upper_orange));
+    geometry_l->add(std::make_shared<Quad>(vec4(-2.0f, -3.0f, 5.0f), vec4(4.0f, 0.0f,  0.0f), vec4(0.0f, 0.0f, -4.0f), lower_teal));
+    world = geometry_l;
 }
 
 void rttnw_scene7(
@@ -401,18 +401,18 @@ void rttnw_scene7(
     camera = pinhole_camera;
 
     // Setup scene
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
 
     PRNG noise_texture_prng = PRNG(prng_seed);
     std::shared_ptr<Texture> perlin_tex = std::make_shared<NoiseTexture>(prng, 4);
     std::shared_ptr<Material> perlin_mat = std::make_shared<Lambertian>(perlin_tex);
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, 0.0f), 1000.0f, perlin_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, 2.0f, 0.0f), 2.0f, perlin_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, 0.0f), 1000.0f, perlin_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(0.0f, 2.0f, 0.0f), 2.0f, perlin_mat));
     
     std::shared_ptr<Material> light = std::make_shared<DiffuseLight>(vec4(4.0f, 4.0f, 4.0f));
-    hittable_l->add(std::make_shared<Quad>(vec4(3.0f, 1.0f, -2.0f), vec4(2.0f, 0.0f, 0.0f), vec4(0.0f, 2.0f, 0.0f), light));
+    geometry_l->add(std::make_shared<Quad>(vec4(3.0f, 1.0f, -2.0f), vec4(2.0f, 0.0f, 0.0f), vec4(0.0f, 2.0f, 0.0f), light));
     
-    world = hittable_l;
+    world = geometry_l;
 }
 
 void rttnw_scene8(
@@ -444,21 +444,21 @@ void rttnw_scene8(
     camera = pinhole_camera;
 
     // Setup scene
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Material> red   = std::make_shared<Lambertian>(vec4(0.65f, 0.05f, 0.05f));
     std::shared_ptr<Material> white = std::make_shared<Lambertian>(vec4(0.73f, 0.73f, 0.73f));
     std::shared_ptr<Material> green = std::make_shared<Lambertian>(vec4(0.12f, 0.45f, 0.15f));
     std::shared_ptr<Material> light = std::make_shared<DiffuseLight>(vec4(15.0f, 15.0f, 15.0f));
 
-    hittable_l->add(std::make_shared<Quad>(vec4(555.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), green));
-    hittable_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), red));
-    hittable_l->add(std::make_shared<Quad>(vec4(343.0f, 554.0f, 332.0f), vec4(-130.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, -105.0f), light));
-    hittable_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), white));
-    hittable_l->add(std::make_shared<Quad>(vec4(555.0f, 555.0f, 555.0f), vec4(-555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, -555.0f), white));
-    hittable_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f, 555.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f, 555.0f,    0.0f), white));
+    geometry_l->add(std::make_shared<Quad>(vec4(555.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), green));
+    geometry_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), red));
+    geometry_l->add(std::make_shared<Quad>(vec4(343.0f, 554.0f, 332.0f), vec4(-130.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, -105.0f), light));
+    geometry_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), white));
+    geometry_l->add(std::make_shared<Quad>(vec4(555.0f, 555.0f, 555.0f), vec4(-555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, -555.0f), white));
+    geometry_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f, 555.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f, 555.0f,    0.0f), white));
 
-    world = hittable_l;
+    world = geometry_l;
 }
 
 void rttnw_scene9(
@@ -490,19 +490,19 @@ void rttnw_scene9(
     camera = pinhole_camera;
 
     // Setup scene
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Material> red   = std::make_shared<Lambertian>(vec4(0.65f, 0.05f, 0.05f));
     std::shared_ptr<Material> white = std::make_shared<Lambertian>(vec4(0.73f, 0.73f, 0.73f));
     std::shared_ptr<Material> green = std::make_shared<Lambertian>(vec4(0.12f, 0.45f, 0.15f));
     std::shared_ptr<Material> light = std::make_shared<DiffuseLight>(vec4(15.0f, 15.0f, 15.0f));
 
-    hittable_l->add(std::make_shared<Quad>(vec4(555.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), green));
-    hittable_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), red));
-    hittable_l->add(std::make_shared<Quad>(vec4(343.0f, 554.0f, 332.0f), vec4(-130.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, -105.0f), light));
-    hittable_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), white));
-    hittable_l->add(std::make_shared<Quad>(vec4(555.0f, 555.0f, 555.0f), vec4(-555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, -555.0f), white));
-    hittable_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f, 555.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f, 555.0f,    0.0f), white));
+    geometry_l->add(std::make_shared<Quad>(vec4(555.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), green));
+    geometry_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4(   0.0f, 555.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), red));
+    geometry_l->add(std::make_shared<Quad>(vec4(343.0f, 554.0f, 332.0f), vec4(-130.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, -105.0f), light));
+    geometry_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f,   0.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f,  555.0f), white));
+    geometry_l->add(std::make_shared<Quad>(vec4(555.0f, 555.0f, 555.0f), vec4(-555.0f,   0.0f, 0.0f), vec4(0.0f,   0.0f, -555.0f), white));
+    geometry_l->add(std::make_shared<Quad>(vec4(  0.0f,   0.0f, 555.0f), vec4( 555.0f,   0.0f, 0.0f), vec4(0.0f, 555.0f,    0.0f), white));
 
     std::shared_ptr<Geometry> box1 = Box(vec4(0.0f, 0.0f, 0.0f), vec4(165.0f, 330.0f, 165.0f), white);
     box1 = std::make_shared<RotateY>(box1, 1.0f / 12.0f * M_PI);
@@ -512,10 +512,10 @@ void rttnw_scene9(
     box2 = std::make_shared<RotateY>(box2, -1.0f / 10.0f * M_PI);
     box2 = std::make_shared<Translate>(box2, vec4(130.0f, 0.0f, 65.0f));
     
-    hittable_l->add(box1);
-    hittable_l->add(box2);
+    geometry_l->add(box1);
+    geometry_l->add(box2);
     
-    world = hittable_l;
+    world = geometry_l;
 }
 
 

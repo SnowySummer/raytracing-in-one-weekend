@@ -71,7 +71,7 @@ private:
             return light_emit;
         }
 
-        // Render hittable
+        // Render geometry
         vec4 scatter_value = srecord.attenuation * ray_value(srecord.scatter_ray, ray_depth-1, world);
         return light_emit + scatter_value;
     }

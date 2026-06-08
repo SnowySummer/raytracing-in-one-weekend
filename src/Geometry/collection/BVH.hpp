@@ -19,20 +19,20 @@ public:
 public:
     // BVH constructor
     BVH() {}
-    BVH(std::shared_ptr<GeometryList> hittable_l) : BVH(hittable_l->geometry_l, 0, hittable_l->size()) {}
-    BVH(std::vector<std::shared_ptr<Geometry>>& hittable_l, int start, int end) {
+    BVH(std::shared_ptr<GeometryList> geometry_l) : BVH(geometry_l->geometry_l, 0, geometry_l->size()) {}
+    BVH(std::vector<std::shared_ptr<Geometry>>& geometry_l, int start, int end) {
         // Build BBox
         for (int i = start; i < end; i++) {
-            bbox = BBox(bbox, hittable_l[i]->bbox);
+            bbox = BBox(bbox, geometry_l[i]->bbox);
         }
         
         // Recursion end
         if (end - start == 1) {
-            left = right = hittable_l[start];
+            left = right = geometry_l[start];
             return;
         } else if (end - start == 2) {
-            left  = hittable_l[start];
-            right = hittable_l[start+1];
+            left  = geometry_l[start];
+            right = geometry_l[start+1];
             return;
         }
 
@@ -51,12 +51,12 @@ public:
             (long_axis == 0) ? comparator_x
             : (long_axis == 1) ? comparator_y
             : comparator_z;
-        std::sort(hittable_l.begin() + start, hittable_l.begin() + end, comparator);
+        std::sort(geometry_l.begin() + start, geometry_l.begin() + end, comparator);
 
         // Build children
         int mid = (start + end) / 2;
-        left = std::make_shared<BVH>(hittable_l, start, mid);
-        right = std::make_shared<BVH>(hittable_l, mid, end);
+        left = std::make_shared<BVH>(geometry_l, start, mid);
+        right = std::make_shared<BVH>(geometry_l, mid, end);
     }
 
     static bool comparator_x(std::shared_ptr<Geometry> a, std::shared_ptr<Geometry> b) {

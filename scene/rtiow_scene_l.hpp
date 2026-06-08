@@ -47,14 +47,14 @@ void rtiow_scene1(
     std::shared_ptr<Material> bubble_mat = std::make_shared<Dielectric>(1.0f / 1.50f);
     std::shared_ptr<Material> right_mat  = std::make_shared<Metal>(vec4(0.8f, 0.6f, 0.2f), 1.0f);
 
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f,    0.0f, -1.2f), 0.5f, center_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.5f, left_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.4f, bubble_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 1.0f,    0.0f, -1.0f), 0.5f, right_mat));
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f,    0.0f, -1.2f), 0.5f, center_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.5f, left_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.4f, bubble_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 1.0f,    0.0f, -1.0f), 0.5f, right_mat));
 
-    world = hittable_l;
+    world = geometry_l;
 }
 
 void rtiow_scene2(
@@ -89,14 +89,14 @@ void rtiow_scene2(
     std::shared_ptr<Material> bubble_mat = std::make_shared<Dielectric>(1.0f / 1.50f);
     std::shared_ptr<Material> right_mat  = std::make_shared<Metal>(vec4(0.8f, 0.6f, 0.2f), 1.0f);
 
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f,    0.0f, -1.2f), 0.5f, center_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.5f, left_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.4f, bubble_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 1.0f,    0.0f, -1.0f), 0.5f, right_mat));
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f,    0.0f, -1.2f), 0.5f, center_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.5f, left_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.4f, bubble_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 1.0f,    0.0f, -1.0f), 0.5f, right_mat));
 
-    world = hittable_l;
+    world = geometry_l;
 }
 
 void rtiow_scene3(
@@ -132,14 +132,14 @@ void rtiow_scene3(
     std::shared_ptr<Material> bubble_mat = std::make_shared<Dielectric>(1.0f / 1.50f);
     std::shared_ptr<Material> right_mat  = std::make_shared<Metal>(vec4(0.8f, 0.6f, 0.2f), 1.0f);
 
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f,    0.0f, -1.2f), 0.5f, center_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.5f, left_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.4f, bubble_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 1.0f,    0.0f, -1.0f), 0.5f, right_mat));
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f,    0.0f, -1.2f), 0.5f, center_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.5f, left_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.4f, bubble_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 1.0f,    0.0f, -1.0f), 0.5f, right_mat));
 
-    world = hittable_l;
+    world = geometry_l;
 }
 
 void rtiow_scene4(
@@ -177,14 +177,14 @@ void rtiow_scene4(
     std::shared_ptr<Material> bubble_mat = std::make_shared<Dielectric>(1.0f / 1.50f);
     std::shared_ptr<Material> right_mat  = std::make_shared<Metal>(vec4(0.8f, 0.6f, 0.2f), 1.0f);
 
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f,    0.0f, -1.2f), 0.5f, center_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.5f, left_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.4f, bubble_mat));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 1.0f,    0.0f, -1.0f), 0.5f, right_mat));
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f, -100.5f, -1.0f), 100.0f, ground_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f,    0.0f, -1.2f), 0.5f, center_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.5f, left_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-1.0f,    0.0f, -1.0f), 0.4f, bubble_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 1.0f,    0.0f, -1.0f), 0.5f, right_mat));
 
-    world = hittable_l;
+    world = geometry_l;
 }
 
 void rtiow_scene5(
@@ -217,17 +217,17 @@ void rtiow_scene5(
     camera = lens_camera;
 
     // Setup scene
-    std::shared_ptr<GeometryList> hittable_l = std::make_shared<GeometryList>();
+    std::shared_ptr<GeometryList> geometry_l = std::make_shared<GeometryList>();
 
     std::shared_ptr<Material> ground_mat = std::make_shared<Lambertian>(vec4(0.5f, 0.5f, 0.5f));
-    hittable_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, -1.0f), 1000.0f, ground_mat));
+    geometry_l->add(std::make_shared<Sphere>(vec4(0.0f, -1000.0f, -1.0f), 1000.0f, ground_mat));
 
     std::shared_ptr<Material> material1 = std::make_shared<Dielectric>(1.5f);
     std::shared_ptr<Material> material2 = std::make_shared<Lambertian>(vec4(0.4f, 0.2f, 0.1f));
     std::shared_ptr<Material> material3 = std::make_shared<Metal>(vec4(0.7f, 0.6f, 0.5f));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 0.0f, 1.0f, 0.0f), 1.0f, material1));
-    hittable_l->add(std::make_shared<Sphere>(vec4(-4.0f, 1.0f, 0.0f), 1.0f, material2));
-    hittable_l->add(std::make_shared<Sphere>(vec4( 4.0f, 1.0f, 0.0f), 1.0f, material3));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 0.0f, 1.0f, 0.0f), 1.0f, material1));
+    geometry_l->add(std::make_shared<Sphere>(vec4(-4.0f, 1.0f, 0.0f), 1.0f, material2));
+    geometry_l->add(std::make_shared<Sphere>(vec4( 4.0f, 1.0f, 0.0f), 1.0f, material3));
 
     for (int a = -11; a < 11; a++) {
         for (int b = -11; b < 11; b++) {
@@ -250,11 +250,11 @@ void rtiow_scene5(
             }
 
             // Add sphere
-            hittable_l->add(std::make_shared<Sphere>(sphere_center, 0.2f, sphere_mat));
+            geometry_l->add(std::make_shared<Sphere>(sphere_center, 0.2f, sphere_mat));
         }
     }
 
-    world = hittable_l;
+    world = geometry_l;
 }
 
 #endif

@@ -19,9 +19,11 @@ public:
     GeometryList() : geometry_l(std::vector<std::shared_ptr<Geometry>>()) {}
 
     // Manage geometry list
-    void add(std::shared_ptr<Geometry> hittable) {
-        geometry_l.push_back(hittable);
-        bbox = BBox(bbox, hittable->bbox);
+    void add(std::shared_ptr<Geometry> geometry) {
+        geometry_l.push_back(geometry);
+
+        // Update BBox
+        bbox = BBox(bbox, geometry->bbox);
     }
     size_t size() const { return geometry_l.size(); }
 
