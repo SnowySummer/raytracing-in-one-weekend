@@ -11,7 +11,7 @@ public:
     // ONB constructor
     ONB() : axis{vec4(), vec4(), vec4()} {}
     ONB(vec4 n) : axis{vec4(), vec4(), vec4()} {
-        vec4 a = (std::fabs(0.9f < vec4::dot(n, vec4(1.0f, 0.0f, 0.0f)))) ? vec4(0.0f, 1.0f, 0.0f) : vec4(1.0f, 0.0f, 0.0f);
+        vec4 a = (0.9f < std::fabs(vec4::dot(n, vec4(1.0f, 0.0f, 0.0f)))) ? vec4(0.0f, 1.0f, 0.0f) : vec4(1.0f, 0.0f, 0.0f);
         axis[0] = vec4::normalise(vec4::cross(n, a));
         axis[1] = vec4::normalise(vec4::cross(n, axis[0]));
         axis[2] = vec4::normalise(n);

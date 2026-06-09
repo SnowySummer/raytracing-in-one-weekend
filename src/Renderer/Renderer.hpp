@@ -71,8 +71,21 @@ private:
             return light_emit;
         }
 
+        // If no PDF, directly go to next ray
+        if (srecord.skip_pdf) {
+            vec4 scatter_value = srecord.attenuation * ray_value(srecord.scatter_ray, ray_depth-1, world);
+            return light_emit + scatter_value;
+        }
+
+        // Generate scattered ray
+        Ray scatter_ray = Ray(record.p, srecord.pdf->generate(prng), ray.time);
+
+        // Calcualte PDF
+        float scatter_pdf = record.mat->scatter_pdf(ray, record, scatter_ray);
+        float pdf_value = srecord.pdf->value(scatter_ray.direction);
+
         // Render geometry
-        vec4 scatter_value = srecord.attenuation * ray_value(srecord.scatter_ray, ray_depth-1, world);
+        vec4 scatter_value = srecord.attenuation * scatter_pdf * ray_value(scatter_ray, ray_depth-1, world) / pdf_value;
         return light_emit + scatter_value;
     }
 

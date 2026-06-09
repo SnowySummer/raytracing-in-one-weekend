@@ -16,6 +16,7 @@ public:
 
     // Ray scattering
     virtual bool ray_scatter(PRNG& prng, Ray ray, HitRecord record, ScatterRecord& srec) const = 0;
+    virtual float scatter_pdf(Ray ray, HitRecord record, Ray scatter_ray) = 0;
 };
 
 #endif

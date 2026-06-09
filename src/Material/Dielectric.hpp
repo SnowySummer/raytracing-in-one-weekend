@@ -29,16 +29,19 @@ public:
         float ri = record.front_face ? 1.0f / refraction_index : refraction_index;
         float cos_theta = vec4::dot(-ray.direction, record.n);
         float sin_theta = std::sqrt(1.0f - cos_theta*cos_theta);
-        if (sin_theta * ri < 1 && reflectance(cos_theta, ri) < prng.randf()) {
-            // Refract ray
-            vec4 scatter_direction = vec4::normalise(vec4::refract(ray.direction, record.n, ri));
-            srec.scatter_ray = Ray(record.p, scatter_direction);
+        
+        srec.skip_pdf = true;
+        srec.scatter_ray.origin = record.p;
+        srec.scatter_ray.time = ray.time;
+        if (1 < ri * sin_theta || prng.randf() < reflectance(cos_theta, ri)) {
+            srec.scatter_ray.direction = vec4::normalise(vec4::reflect(ray.direction, record.n));
         } else {
-            // Reflect ray
-            vec4 scatter_direction = vec4::normalise(vec4::reflect(ray.direction, record.n));
-            srec.scatter_ray = Ray(record.p, scatter_direction, ray.time);
+            srec.scatter_ray.direction = vec4::normalise(vec4::refract(ray.direction, record.n, ri));
         }
         return true;
+    }
+    float scatter_pdf(Ray ray, HitRecord record, Ray scatter_ray) override {
+        return 0.0f;
     }
 
 private:

@@ -55,6 +55,16 @@ public:
             if (r.len2() < 1.0f) return vec4::normalise(r);
         }
     }
+    vec4 cosine_hemisphere() {
+        float r1 = randf();
+        float r2 = randf();
+
+        return vec4(
+            std::cos(2*M_PI*r1) * std::sqrt(r2),
+            std::sin(2*M_PI*r1) * std::sqrt(r2),
+            std::sqrt(1-r2)
+        );
+    }
 };
 
 #endif

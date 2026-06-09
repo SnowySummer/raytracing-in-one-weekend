@@ -16,7 +16,7 @@ int main() {
     std::shared_ptr<Renderer> renderer;
     std::shared_ptr<Camera> camera;
     std::shared_ptr<Geometry> world;
-    rttnw_scene4(renderer, framebuffer, camera, world);
+    rttnw_scene10(renderer, framebuffer, camera, world);
 
     // Render
     renderer->render(framebuffer, camera, world);

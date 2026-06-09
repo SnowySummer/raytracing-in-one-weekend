@@ -13,12 +13,13 @@
 #include <Material/Lambertian.hpp>
 #include <Material/Material.hpp>
 #include <Material/Metal.hpp>
+#include <Renderer/RendererSkyBackground.hpp>
 #include <Framebuffer.hpp>
 #include <cstdint>
 #include <memory>
 
 void rtiow_scene1(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Geometry>& world
@@ -27,9 +28,10 @@ void rtiow_scene1(
     constexpr uint32_t prng_seed = 1337;
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
@@ -58,7 +60,7 @@ void rtiow_scene1(
 }
 
 void rtiow_scene2(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Geometry>& world
@@ -67,9 +69,10 @@ void rtiow_scene2(
     constexpr uint32_t prng_seed = 1337;
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
@@ -100,7 +103,7 @@ void rtiow_scene2(
 }
 
 void rtiow_scene3(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Geometry>& world
@@ -109,9 +112,10 @@ void rtiow_scene3(
     constexpr uint32_t prng_seed = 1337;
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
@@ -143,7 +147,7 @@ void rtiow_scene3(
 }
 
 void rtiow_scene4(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Geometry>& world
@@ -152,9 +156,10 @@ void rtiow_scene4(
     constexpr uint32_t prng_seed = 1337;
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);
@@ -188,7 +193,7 @@ void rtiow_scene4(
 }
 
 void rtiow_scene5(
-    Renderer& renderer,
+    std::shared_ptr<Renderer>& renderer,
     Framebuffer& framebuffer,
     std::shared_ptr<Camera>& camera,
     std::shared_ptr<Geometry>& world
@@ -198,9 +203,10 @@ void rtiow_scene5(
     PRNG prng = PRNG(prng_seed);
 
     // Setup renderer
-    renderer.prng.set_seed(prng_seed);
-    renderer.samples_per_pixel = 100;
-    renderer.ray_maxdepth = 10;
+    renderer = std::make_shared<RendererSkyBackground>();
+    renderer->prng.set_seed(prng_seed);
+    renderer->samples_per_pixel = 100;
+    renderer->ray_maxdepth = 10;
 
     // Setup framebuffer
     framebuffer = Framebuffer(400, 225);

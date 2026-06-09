@@ -5,6 +5,7 @@
 
 #include <common/PRNG.hpp>
 #include <common/vec4.hpp>
+#include <PDF/CosinePDF.hpp>
 #include <Texture/SolidColorTexture.hpp>
 #include <Texture/Texture.hpp>
 
@@ -28,8 +29,13 @@ public:
     // Ray scattering
     bool ray_scatter(PRNG& prng, Ray ray, HitRecord record, ScatterRecord& srec) const override {
         srec.attenuation = tex->value(record.u, record.v, record.p);
-        srec.scatter_ray = Ray(record.p, vec4::normalise(record.n + prng.on_sphere()), ray.time);
+        srec.skip_pdf = false;
+        srec.pdf = std::make_shared<CosinePDF>(record.n);
         return true;
+    }
+    float scatter_pdf(Ray ray, HitRecord record, Ray scatter_ray) override {
+        float cos_theta = vec4::dot(record.n, vec4::normalise(scatter_ray.direction));
+        return (cos_theta < 0) ? 0.0f : cos_theta / M_PI;
     }
 };
 

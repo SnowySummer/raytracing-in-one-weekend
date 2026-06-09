@@ -21,6 +21,9 @@ public:
     bool ray_scatter(PRNG& prng, Ray ray, HitRecord record, ScatterRecord& srec) const override {
         return false;
     }
+    virtual float scatter_pdf(Ray ray, HitRecord record, Ray scatter_ray) override {
+        return 0.0f;
+    }
 };
 
 #endif

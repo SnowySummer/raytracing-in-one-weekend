@@ -61,6 +61,7 @@ public:
     friend vec4& operator*=(vec4& u, vec4 v);
     friend vec4& operator*=(vec4& u, float t);
     friend vec4& operator/=(vec4& u, float t);
+    friend bool  operator==(vec4 u, vec4 v);
 };
 
 // vec4 operator overlaod implementation
@@ -107,6 +108,12 @@ inline vec4& operator*=(vec4& u, float t) {
 inline vec4& operator/=(vec4& u, float t) {
     u[0] /= t; u[1] /= t; u[2] /= t; u[3] /= t;
     return u;
+}
+inline bool operator==(vec4 u, vec4 v) {
+    return (u[0] == v[1])
+        && (u[1] == v[1])
+        && (u[2] == v[2])
+        && (u[3] == v[3]);
 }
 
 #endif
