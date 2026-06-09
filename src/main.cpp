@@ -6,24 +6,34 @@
 #include <PostProcessing.hpp>
 #include <memory>
 
-#include <../scene/rtiow_scene_l.hpp>
-#include <../scene/rttnw_scene_l.hpp>
+// RTIOW scenes
+#include <Scene/RTIOW/Scene1.hpp>
+#include <Scene/RTIOW/Scene2.hpp>
+#include <Scene/RTIOW/Scene3.hpp>
+#include <Scene/RTIOW/Scene4.hpp>
+#include <Scene/RTIOW/Scene5.hpp>
+
+// RTTNW scenes
+#include <Scene/RTTNW/Scene1.hpp>
+#include <Scene/RTTNW/Scene2.hpp>
+#include <Scene/RTTNW/Scene3.hpp>
+#include <Scene/RTTNW/Scene4.hpp>
+#include <Scene/RTTNW/Scene5.hpp>
+#include <Scene/RTTNW/Scene6.hpp>
+#include <Scene/RTTNW/Scene7.hpp>
+#include <Scene/RTTNW/Scene8.hpp>
+#include <Scene/RTTNW/Scene9.hpp>
+#include <Scene/RTTNW/Scene10.hpp>
 
 int main() {
 
-    // Setup scene
-    Framebuffer framebuffer;
-    std::shared_ptr<Renderer> renderer;
-    std::shared_ptr<Camera> camera;
-    std::shared_ptr<Geometry> world;
-    rttnw_scene10(renderer, framebuffer, camera, world);
-
-    // Render
-    renderer->render(framebuffer, camera, world);
-    PostProcessing::gamma(framebuffer, 1.0f / 2.2f);
+    // Setup scene and render
+    std::shared_ptr<Scene> scene = std::make_shared<RTTNW::Scene10>();
+    scene->init_all();
+    scene->render();
 
     // Export to PNG
-    FramebufferExport::to_png(framebuffer, "../gen/img.png");
+    FramebufferExport::to_png(scene->framebuffer, "../gen/img.png");
 
     return 0;
 }
