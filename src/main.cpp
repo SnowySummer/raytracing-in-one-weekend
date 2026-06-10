@@ -27,11 +27,13 @@
 
 // RTTROYL scenes
 #include <Scene/RTTROYL/Scene1.hpp>
+#include <Scene/RTTROYL/Scene2.hpp>
+#include <Scene/RTTROYL/Scene3.hpp>
 
 int main() {
 
     // Setup scene and render
-    std::shared_ptr<Scene> scene = std::make_shared<RTTROYL::Scene1>();
+    std::shared_ptr<Scene> scene = std::make_shared<RTTROYL::Scene3>();
     scene->init_all();
     scene->render();
 
