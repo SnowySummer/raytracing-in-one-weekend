@@ -33,7 +33,14 @@ Path-tracer Camera types
 
 | Image | Description |
 | ----- | ----------- |
-| ![](gallery/rtiow_scene1.png) | RTIOW Lambertian/Metal/Dielectric materials showcase |
+| ![](gallery/rtiow_scene1.png) | RTIOW scene: Lambertian, Metal and Dielectric materials showcase |
+| ![](gallery/rtiow_scene5.png) | RTIOW cover image |
+| ![](gallery/rttnw_scene5.png) | RTTNW scene: Perlin noise showcase |
+| ![](gallery/rttnw_scene7.png) | RTTNW scene: Lighting showcase |
+| ![](gallery/rttnw_scene9.png) | RTTNW scene: Cornell Box |
+| ![](gallery/rttroyl_scene1.png) | RTTROYL scene: Cornell Box with lights |
+| ![](gallery/rttroyl_scene2.png) | RTTROYL scene: Cornell Box with metallic surface |
+| ![](gallery/rttroyl_scene3.png) | RTTROYL scene: Cornell Box with sphere geometry |
 
 ## Further notes
 
