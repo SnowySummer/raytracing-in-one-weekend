@@ -11,7 +11,7 @@ public:
 
     // Generate direction and PDF
     virtual vec4 generate(PRNG& prng) = 0;
-    virtual float value(vec4 direction) = 0;
+    virtual float value(PRNG& prng, vec4 direction) = 0;
 };
 
 #endif

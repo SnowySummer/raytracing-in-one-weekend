@@ -11,7 +11,7 @@ public:
     vec4 generate(PRNG& prng) override {
         return prng.on_sphere();
     }
-    float value(vec4 direction) override {
+    float value(PRNG& prng, vec4 direction) override {
         return 1.0f / (4 * M_PI);
     }
 };

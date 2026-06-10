@@ -15,7 +15,10 @@ public:
     DiffuseLight(vec4 _light) : light(std::make_shared<SolidColorTexture>(_light)) {}
 
     // Light emission
-    vec4 light_emission(float u, float v, vec4 p) override { return light->value(u, v, p); }
+    vec4 light_emission(Ray ray, HitRecord record, float u, float v, vec4 p) override {
+        if (!record.front_face) return vec4(0.0f, 0.0f, 0.0f);
+        return light->value(u, v, p);
+    }
 
     // Ray scattering
     bool ray_scatter(PRNG& prng, Ray ray, HitRecord record, ScatterRecord& srec) const override {

@@ -12,7 +12,7 @@ public:
     virtual ~Material() {}
 
     // Light emission
-    virtual vec4 light_emission(float u, float v, vec4 p) = 0;
+    virtual vec4 light_emission(Ray ray, HitRecord record, float u, float v, vec4 p) = 0;
 
     // Ray scattering
     virtual bool ray_scatter(PRNG& prng, Ray ray, HitRecord record, ScatterRecord& srec) const = 0;

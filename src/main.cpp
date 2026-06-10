@@ -25,10 +25,13 @@
 #include <Scene/RTTNW/Scene9.hpp>
 #include <Scene/RTTNW/Scene10.hpp>
 
+// RTTROYL scenes
+#include <Scene/RTTROYL/Scene1.hpp>
+
 int main() {
 
     // Setup scene and render
-    std::shared_ptr<Scene> scene = std::make_shared<RTTNW::Scene10>();
+    std::shared_ptr<Scene> scene = std::make_shared<RTTROYL::Scene1>();
     scene->init_all();
     scene->render();
 

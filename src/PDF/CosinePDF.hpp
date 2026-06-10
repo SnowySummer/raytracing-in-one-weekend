@@ -17,7 +17,7 @@ public:
     vec4 generate(PRNG& prng) override {
         return onb.transform(prng.cosine_hemisphere());
     }
-    float value(vec4 direction) override {
+    float value(PRNG& prng, vec4 direction) override {
         float cos_theta = vec4::dot(vec4::normalise(direction), onb.axis[2]);
         return fmax(0.0f, cos_theta / M_PI);
     }

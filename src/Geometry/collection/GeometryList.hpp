@@ -40,6 +40,19 @@ public:
         }
         return is_hit;
     }
+
+    // PDF functions
+    vec4 random(PRNG& prng, vec4 origin) override {
+        int i = prng.randi(0, geometry_l.size()-1);
+        return geometry_l[i]->random(prng, origin);
+    }
+    float pdf_value(PRNG& prng, vec4 origin, vec4 direction) override {
+        float sum = 0.0f;
+        for (int i = 0; i < geometry_l.size(); i++) {
+            sum += geometry_l[i]->pdf_value(prng, origin, direction);
+        }
+        return sum / geometry_l.size();
+    }
 };
 
 #endif

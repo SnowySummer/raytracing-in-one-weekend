@@ -20,6 +20,7 @@ private:
     vec4 n;
     vec4 w;
     float D;
+    float area;
 
 public:
     // Quad constructor
@@ -33,6 +34,7 @@ public:
         // Calculate quad private members
         n = vec4::cross(u, v);
         w = n / n.len2();
+        area = n.len();
         n = vec4::normalise(n);
         D = vec4::dot(n, Q);
     }
@@ -63,6 +65,25 @@ public:
         record.mat = mat;
 
         return true;
+    }
+    
+    // PDF functions
+    virtual vec4 random(PRNG& prng, vec4 origin) {
+        vec4 p = Q + (prng.randf() * u) + (prng.randf() * v);
+        return p - origin;
+    }
+    virtual float pdf_value(PRNG& prng, vec4 origin, vec4 direction) {
+        // Check visibility
+        HitRecord record;
+        if (!ray_hit(prng, Ray(origin, direction), Interval(1e-3f, INFINITY), record)) {
+            return 0.0f;
+        }
+
+        // Calculate solid angle
+        float dist_2 = record.t * record.t * direction.len2();
+        float cos_theta = std::fabs(vec4::dot(direction, record.n) / direction.len());
+
+        return dist_2 / (cos_theta * area);
     }
 };
 

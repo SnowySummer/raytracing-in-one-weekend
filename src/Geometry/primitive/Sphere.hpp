@@ -5,6 +5,7 @@
 
 #include <common/Interval.hpp>
 #include <common/vec4.hpp>
+#include <common/ONB.hpp>
 #include <common/Ray.hpp>
 #include <Material/Material.hpp>
 #include <HitRecord.hpp>
@@ -60,6 +61,41 @@ public:
         record.mat = mat;
 
         return true;
+    }
+
+    // PDF functions
+    vec4 random(PRNG& prng, vec4 origin) override {
+        vec4 direction = center_ray.at(0) - origin;
+        float dist_2 = direction.len2();
+        ONB onb = ONB(direction);
+        return onb.transform(random_to_sphere(prng, radius, dist_2));
+    }
+    float pdf_value(PRNG& prng, vec4 origin, vec4 direction) override {
+        // Check visibility
+        HitRecord record;
+        if (!ray_hit(prng, Ray(origin, direction), Interval(1e-3f, INFINITY), record)) {
+            return 0.0f;
+        }
+
+        // Calculate solid angle
+        float dist_2 = (center_ray.at(0) - origin).len2();
+        float cos_theta_max = std::sqrt(1 - radius*radius/dist_2);
+        float solid_angle = 2*M_PI*(1 - cos_theta_max);
+
+        return 1 / solid_angle;
+    }
+
+private:
+    vec4 random_to_sphere(PRNG& prng, float radius, float dist_2) {
+        float r1 = prng.randf();
+        float r2 = prng.randf();
+
+        float cos_theta_max = std::sqrt(1.0f - radius*radius / dist_2);
+        float z = 1 + r2*(cos_theta_max - 1.0f);
+        float x = std::cos(2*M_PI*r1) * std::sqrt(1 - z*z);
+        float y = std::sin(2*M_PI*r1) * std::sqrt(1 - z*z);
+
+        return vec4(x, y, z);
     }
 
 private:

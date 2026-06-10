@@ -16,7 +16,7 @@ public:
     Dielectric(float _refraction_index) : refraction_index(_refraction_index) {}
     
     // Light emission
-    vec4 light_emission(float u, float v, vec4 p) override {
+    vec4 light_emission(Ray ray, HitRecord record, float u, float v, vec4 p) override {
         return vec4(0.0f, 0.0f, 0.0f);
     }
 
