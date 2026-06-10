@@ -33,7 +33,7 @@
 int main() {
 
     // Setup scene and render
-    std::shared_ptr<Scene> scene = std::make_shared<RTTROYL::Scene3>();
+    std::shared_ptr<Scene> scene = std::make_shared<RTTNW::Scene9>();
     scene->init_all();
     scene->render();
 
