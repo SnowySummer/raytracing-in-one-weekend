@@ -95,6 +95,10 @@ public:
 
         world = world_bvh;
     }
+
+    void init_light_hint() override {
+        use_light = false;
+    }
 };
 
 }

@@ -60,6 +60,10 @@ public:
         geometry_l->add(std::make_shared<Sphere>(vec4(0.0f, 2.0f, 0.0f), 2.0f, perlin_mat));
         world = geometry_l;
     }
+
+    void init_light_hint() override {
+        use_light = false;
+    }
 };
 
 }

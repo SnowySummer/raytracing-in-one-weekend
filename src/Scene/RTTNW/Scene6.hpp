@@ -67,6 +67,10 @@ public:
         geometry_l->add(std::make_shared<Quad>(vec4(-2.0f, -3.0f, 5.0f), vec4(4.0f, 0.0f,  0.0f), vec4(0.0f, 0.0f, -4.0f), lower_teal));
         world = geometry_l;
     }
+
+    void init_light_hint() override {
+        use_light = false;
+    }
 };
 
 }

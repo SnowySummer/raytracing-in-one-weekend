@@ -90,6 +90,10 @@ public:
 
         world = geometry_l;
     }
+
+    void init_light_hint() override {
+        use_light = false;
+    }
 };
 
 }
